@@ -196,13 +196,11 @@
             background: #2563eb;
         }
 
-        /* ========== MARCA DE AGUA EN LA SECCIÓN INICIO ========== */
+        /* ========== MARCA DE AGUA CON IMAGEN ========== */
         #section-inicio {
             position: relative;
             overflow: hidden;
         }
-        /* Opción 1: Usar una imagen (descomenta y cambia la ruta) */
-        /*
         #section-inicio::before {
             content: "";
             position: absolute;
@@ -210,29 +208,15 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('ruta/a/tu/logo-finesi.png'); /* Cambia por la ruta de tu logo */
+            /* Usamos la URL raw de la imagen */
+            background-image: url('https://raw.githubusercontent.com/renzotchss301-lgtm/coursRenzo/main/finesi/images.jpg');
             background-repeat: no-repeat;
             background-position: center;
-            background-size: contain;
-            opacity: 0.10; /* Ajusta la opacidad (0.0 a 1.0) */
-            pointer-events: none;
+            background-size: contain; /* Para que no se recorte y se vea completa */
+            opacity: 0.08; /* Muy baja opacidad para que sea sutil */
+            filter: grayscale(100%); /* La convertimos a blanco y negro */
+            pointer-events: none; /* Para que no interfiera con clics */
             z-index: 0;
-        }
-        */
-        /* Opción 2: Usar texto (actualmente activa) */
-        #section-inicio::before {
-            content: "FINESI";
-            font-size: 200px;
-            font-weight: 900;
-            color: #0f172a;
-            opacity: 0.05;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 0;
-            white-space: nowrap;
         }
         /* Asegura que el contenido quede por encima */
         #section-inicio > * {
@@ -251,9 +235,6 @@
             }
             .btn-descargar {
                 align-self: flex-start;
-            }
-            #section-inicio::before {
-                font-size: 100px; /* Reducimos el tamaño en móviles */
             }
         }
     </style>
