@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intranet - Gestión de Proyectos TICs</title>
+    <title>INTRANET - Gestión de Proyectos TICs</title>
     <style>
         /* --- Reset y Estilos Globales --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        
+
         /* --- Fondo con marca de agua en toda la página --- */
         body {
             background: #f4f7fc;
@@ -17,7 +17,7 @@
         }
         body::before {
             content: "";
-            position: fixed; /* Fijo para que no se desplace al hacer scroll */
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
@@ -25,14 +25,14 @@
             background-image: url('https://raw.githubusercontent.com/renzotchss301-lgtm/coursRenzo/main/finesi/images.jpg');
             background-repeat: no-repeat;
             background-position: center;
-            background-size: 70% auto; /* Más grande que antes */
+            background-size: 70% auto;
             opacity: 0.08;
             filter: grayscale(100%);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* --- Barra Lateral (Sidebar) --- */
+        /* --- Barra Lateral --- */
         .sidebar {
             width: 260px;
             background: #0f172a;
@@ -44,7 +44,14 @@
             overflow-y: auto;
             z-index: 100;
         }
-        .sidebar h2 { font-weight: 300; border-bottom: 2px solid #3b82f6; padding-bottom: 15px; margin-bottom: 30px; }
+        .sidebar h2 {
+            font-weight: 300;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
         .sidebar h2 span { font-weight: 600; color: #60a5fa; }
         .sidebar nav a {
             display: block;
@@ -69,17 +76,8 @@
             padding: 40px 50px;
             width: 100%;
             position: relative;
-            z-index: 1; /* Para que el contenido esté por encima del fondo */
+            z-index: 1;
         }
-
-        /* Fondo semitransparente para tarjetas y bloques, para que se vea la marca de agua */
-        .card-curso, .section-block, .silabo-contenido, .grid-cards .card-curso,
-        #section-inicio .card-curso, #section-inicio > div:last-child {
-            background: rgba(255, 255, 255, 0.85); /* Blanco con transparencia */
-            backdrop-filter: blur(2px); /* Ligero desenfoque para suavizar */
-        }
-
-        /* Aseguramos que el header también sea semitransparente si se desea, pero lo dejamos blanco sólido para legibilidad */
         .main-content header {
             background: rgba(255, 255, 255, 0.9);
             padding: 20px 30px;
@@ -90,11 +88,16 @@
             align-items: center;
             border-bottom: 2px solid #e2e8f0;
         }
-
         .main-content header h1 { color: #0f172a; font-weight: 600; }
         .main-content header .badge { background: #3b82f6; color: white; padding: 5px 15px; border-radius: 30px; font-size: 14px; }
 
-        /* --- Grid de Tarjetas (Cursos) --- */
+        /* --- Tarjetas generales --- */
+        .card-curso, .section-block, .silabo-contenido,
+        #section-inicio .card-curso, #section-inicio > div:last-child {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(2px);
+        }
+
         .grid-cards {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -141,9 +144,7 @@
             align-self: flex-start;
             margin-bottom: 12px;
         }
-        .card-curso .btn-ingresar {
-            background: #3b82f6;
-            color: white;
+        .btn-ingresar, .btn-silabo {
             border: none;
             padding: 10px 0;
             border-radius: 8px;
@@ -152,30 +153,45 @@
             transition: background 0.2s;
             text-align: center;
             text-decoration: none;
-            margin-top: 10px;
             display: block;
+            margin-top: 8px;
         }
-        .card-curso .btn-ingresar:hover { background: #2563eb; }
+        .btn-ingresar {
+            background: #3b82f6;
+            color: white;
+        }
+        .btn-ingresar:hover { background: #2563eb; }
+        .btn-silabo {
+            background: #10b981;
+            color: white;
+        }
+        .btn-silabo:hover { background: #059669; }
 
-        /* --- Secciones de texto --- */
+        /* --- Secciones --- */
         .section-block {
             border-radius: 16px;
             padding: 25px 30px;
             margin-top: 30px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-        .section-block h2 { color: #0f172a; margin-bottom: 20px; border-left: 6px solid #3b82f6; padding-left: 15px; }
+        .section-block h2 {
+            color: #0f172a;
+            margin-bottom: 20px;
+            border-left: 6px solid #3b82f6;
+            padding-left: 15px;
+        }
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; padding: 12px 10px; background: #f8fafc; color: #475569; font-weight: 600; }
         td { padding: 12px 10px; border-bottom: 1px solid #e2e8f0; color: #1e293b; }
+
         .docente-perfil { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
         .docente-perfil .avatar {
-            width: 60px; height: 60px; border-radius: 50%; 
-            background: #3b82f6; color: white; display: flex; 
+            width: 60px; height: 60px; border-radius: 50%;
+            background: #3b82f6; color: white; display: flex;
             align-items: center; justify-content: center; font-size: 28px;
         }
 
-        /* --- Estilos para la lista de sílabos --- */
+        /* --- Sílabos --- */
         .silabo-contenido {
             border-radius: 16px;
             padding: 30px;
@@ -195,26 +211,14 @@
             padding: 16px 0;
             border-bottom: 1px solid #e2e8f0;
         }
-        .silabo-item:last-child {
-            border-bottom: none;
-        }
+        .silabo-item:last-child { border-bottom: none; }
         .silabo-info {
             display: flex;
             flex-direction: column;
         }
-        .silabo-info .curso {
-            font-weight: 600;
-            color: #0f172a;
-        }
-        .silabo-info .docente {
-            font-size: 14px;
-            color: #64748b;
-        }
-        .silabo-info .codigo {
-            font-size: 13px;
-            color: #3b82f6;
-            font-weight: 500;
-        }
+        .silabo-info .curso { font-weight: 600; color: #0f172a; }
+        .silabo-info .docente { font-size: 14px; color: #64748b; }
+        .silabo-info .codigo { font-size: 13px; color: #3b82f6; font-weight: 500; }
         .btn-descargar {
             background: #3b82f6;
             color: white;
@@ -226,13 +230,11 @@
             transition: background 0.2s;
             white-space: nowrap;
         }
-        .btn-descargar:hover {
-            background: #2563eb;
-        }
+        .btn-descargar:hover { background: #2563eb; }
 
-        /* Estilo para el mensaje de bienvenida en Inicio */
+        /* --- Estilo para el mensaje de bienvenida --- */
         #section-inicio > div:last-child {
-            background: rgba(224, 242, 254, 0.85); /* Fondo semitransparente */
+            background: rgba(224, 242, 254, 0.85);
             padding: 20px;
             border-radius: 16px;
             border: 1px solid #bae6fd;
@@ -242,17 +244,9 @@
         @media (max-width: 768px) {
             .sidebar { width: 100%; height: auto; position: relative; }
             .main-content { margin-left: 0; padding: 20px; }
-            .silabo-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            .btn-descargar {
-                align-self: flex-start;
-            }
-            body::before {
-                background-size: 90% auto; /* En móviles se ve más grande */
-            }
+            .silabo-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .btn-descargar { align-self: flex-start; }
+            body::before { background-size: 90% auto; }
         }
     </style>
 </head>
@@ -260,7 +254,7 @@
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
-        <h2>📘 <span>Intranet</span> TICs</h2>
+        <h2>📘 <span>INTRANET</span></h2>
         <nav>
             <a class="active" onclick="showSection('inicio')">🏠 Inicio</a>
             <a onclick="showSection('cursos')">📚 Mis Cursos</a>
@@ -280,45 +274,102 @@
             <span class="badge">2026 - I</span>
         </header>
 
-        <!-- ========== SECCIÓN INICIO ========== -->
+        <!-- ========== SECCIÓN INICIO (Panel de Control) ========== -->
         <div id="section-inicio">
             <div class="grid-cards">
+                <!-- Tarjeta: Cursos Activos -->
                 <div class="card-curso" style="border-left: 6px solid #3b82f6; padding:25px;">
                     <h3>📚 Cursos Activos</h3>
                     <p style="color:#64748b; margin:5px 0 15px;">Tienes <strong id="totalCursos">6</strong> cursos matriculados</p>
                     <a class="btn-ingresar" style="background:#64748b;" onclick="showSection('cursos')">Ver todos →</a>
                 </div>
+                <!-- Tarjeta: Sílabos -->
                 <div class="card-curso" style="border-left: 6px solid #10b981; padding:25px;">
                     <h3>📄 Sílabos</h3>
-                    <p style="color:#64748b; margin:5px 0 15px;">Consulta los programas oficiales</p>
+                    <p style="color:#64748b; margin:5px 0 15px;">Descarga los programas oficiales</p>
                     <a class="btn-ingresar" style="background:#10b981;" onclick="showSection('silabos')">Ver sílabos →</a>
                 </div>
+                <!-- Tarjeta: Compañeros -->
                 <div class="card-curso" style="border-left: 6px solid #f59e0b; padding:25px;">
                     <h3>👥 Compañeros</h3>
                     <p style="color:#64748b; margin:5px 0 15px;">Conecta con tu clase</p>
                     <a class="btn-ingresar" style="background:#f59e0b;" onclick="showSection('companeros')">Lista →</a>
                 </div>
+                <!-- NUEVA: Horario -->
+                <div class="card-curso" style="border-left: 6px solid #8b5cf6; padding:25px;">
+                    <h3>📅 Horario</h3>
+                    <p style="color:#64748b; margin:5px 0 15px;">Consulta tu horario de clases</p>
+                    <a href="#" class="btn-ingresar" style="background:#8b5cf6;">Ver horario →</a>
+                </div>
+                <!-- NUEVA: Asistencia -->
+                <div class="card-curso" style="border-left: 6px solid #ef4444; padding:25px;">
+                    <h3>✅ Asistencia</h3>
+                    <p style="color:#64748b; margin:5px 0 15px;">Registro de asistencia a clases</p>
+                    <a href="#" class="btn-ingresar" style="background:#ef4444;">Ver asistencia →</a>
+                </div>
+                <!-- NUEVA: Calendario Académico -->
+                <div class="card-curso" style="border-left: 6px solid #06b6d4; padding:25px;">
+                    <h3>📆 Calendario Académico</h3>
+                    <p style="color:#64748b; margin:5px 0 15px;">Fechas importantes del semestre</p>
+                    <a href="#" class="btn-ingresar" style="background:#06b6d4;">Ver calendario →</a>
+                </div>
+                <!-- NUEVA: Avisos -->
+                <div class="card-curso" style="border-left: 6px solid #f43f5e; padding:25px;">
+                    <h3>📢 Avisos</h3>
+                    <p style="color:#64748b; margin:5px 0 15px;">Comunicados oficiales</p>
+                    <a href="#" class="btn-ingresar" style="background:#f43f5e;">Ver avisos →</a>
+                </div>
+                <!-- NUEVA: Recursos -->
+                <div class="card-curso" style="border-left: 6px solid #14b8a6; padding:25px;">
+                    <h3>📚 Recursos</h3>
+                    <p style="color:#64748b; margin:5px 0 15px;">Biblioteca, herramientas, guías</p>
+                    <a href="#" class="btn-ingresar" style="background:#14b8a6;">Ver recursos →</a>
+                </div>
+                <!-- NUEVA: Próximos eventos -->
+                <div class="card-curso" style="border-left: 6px solid #f97316; padding:25px;">
+                    <h3>🏆 Próximos Eventos</h3>
+                    <p style="color:#64748b; margin:5px 0 15px;">Actividades y fechas importantes</p>
+                    <a href="#" class="btn-ingresar" style="background:#f97316;">Ver eventos →</a>
+                </div>
             </div>
-            <div style="position:relative; z-index:1;">
+
+            <!-- Sección extra: tareas pendientes y contador -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;">
+                <div style="background: rgba(255,255,255,0.85); backdrop-filter: blur(2px); border-radius:16px; padding:20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <h3 style="color:#0f172a; margin-bottom:10px;">📋 Tareas Pendientes</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 8px 0; border-bottom: 1px solid #e2e8f0;">📌 Entregar avance del proyecto - 20/07</li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid #e2e8f0;">📌 Leer capítulo 5 - PMBOK</li>
+                        <li style="padding: 8px 0;">📌 Preparar presentación final - 28/07</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(255,255,255,0.85); backdrop-filter: blur(2px); border-radius:16px; padding:20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <h3 style="color:#0f172a; margin-bottom:10px;">⏳ Próximo Examen Final</h3>
+                    <p style="font-size: 36px; font-weight: 700; color: #3b82f6; text-align: center;" id="contador-examen">--</p>
+                    <p style="text-align: center; color: #64748b;">días restantes</p>
+                </div>
+            </div>
+
+            <!-- Mensaje de bienvenida -->
+            <div style="margin-top: 30px;">
                 <p style="color:#0369a1;">📌 <strong>Bienvenido a tu Intranet Personal.</strong> Aquí tienes acceso a todos tus cursos, sílabos, docentes y compañeros.</p>
             </div>
         </div>
 
-        <!-- ========== SECCIÓN CURSOS (dinámica con JS) ========== -->
+        <!-- ========== SECCIÓN CURSOS (con botón a sílabo) ========== -->
         <div id="section-cursos" style="display:none;">
             <h2 style="color:#0f172a; margin-bottom:20px;">📚 Mis Cursos</h2>
             <div id="cursosContainer" class="grid-cards">
-                <!-- Los cursos se renderizan con JavaScript -->
+                <!-- Renderizado por JS -->
             </div>
         </div>
 
-        <!-- ========== SECCIÓN SÍLABOS ========== -->
+        <!-- ========== SECCIÓN SÍLABOS (lista de descarga) ========== -->
         <div id="section-silabos" style="display:none;">
             <h2 style="color:#0f172a; margin-bottom:20px;">📄 Sílabos Oficiales</h2>
             <div class="silabo-contenido">
                 <heading>📚 Descarga los sílabos de todos tus cursos</heading>
-                
-                <!-- EST315 - Gestión de Proyectos TICs -->
+                <!-- Los items se generan manualmente aquí, pero también podrían ser dinámicos -->
                 <div class="silabo-item">
                     <div class="silabo-info">
                         <span class="codigo">EST315</span>
@@ -327,8 +378,6 @@
                     </div>
                     <a href="https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_GESTION%20DE%20PROYECTOS%20TICS%20-%20MELGAREJO%20BOLIVAR%20ROMEL%20PERCY.pdf" target="_blank" class="btn-descargar">📄 Descargar</a>
                 </div>
-
-                <!-- EST314 - Aprendizaje No Supervisado -->
                 <div class="silabo-item">
                     <div class="silabo-info">
                         <span class="codigo">EST314</span>
@@ -337,8 +386,6 @@
                     </div>
                     <a href="https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Aprendizaje_no_Supervizado%20-%20ALEMAN%20GONZALES%20LEONID.pdf" target="_blank" class="btn-descargar">📄 Descargar</a>
                 </div>
-
-                <!-- EST316 - Arquitectura de Redes y Protocolos -->
                 <div class="silabo-item">
                     <div class="silabo-info">
                         <span class="codigo">EST316</span>
@@ -347,8 +394,6 @@
                     </div>
                     <a href="https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Arquitectura%20de%20Redes%20y%20Protocolos%20-%20APAZA%20TARQUI%20ALEJANDRO.pdf" target="_blank" class="btn-descargar">📄 Descargar</a>
                 </div>
-
-                <!-- EST210 - Modelos Lineales -->
                 <div class="silabo-item">
                     <div class="silabo-info">
                         <span class="codigo">EST210</span>
@@ -357,8 +402,6 @@
                     </div>
                     <a href="https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_MODELOS%20LINEALES%20-%20MORILLOS%20VALDERRAMA%20SANTOS%20OCTAVIO.pdf" target="_blank" class="btn-descargar">📄 Descargar</a>
                 </div>
-
-                <!-- EST200 - Regresión Lineal y No Lineal -->
                 <div class="silabo-item">
                     <div class="silabo-info">
                         <span class="codigo">EST200</span>
@@ -367,8 +410,6 @@
                     </div>
                     <a href="https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_REGRESION%20LINEAL%20Y%20NO%20LINEAL%20-%20VARGAS%20VALVERDE%20CONFESOR%20MILAN.pdf" target="_blank" class="btn-descargar">📄 Descargar</a>
                 </div>
-
-                <!-- EST317 - Series de Tiempo -->
                 <div class="silabo-item">
                     <div class="silabo-info">
                         <span class="codigo">EST317</span>
@@ -412,7 +453,7 @@
             </div>
         </div>
 
-        <!-- ========== SECCIÓN COMPAÑEROS ========== -->
+        <!-- ========== SECCIÓN COMPAÑEROS (con correos generados) ========== -->
         <div id="section-companeros" style="display:none;">
             <h2 style="color:#0f172a; margin-bottom:20px;">👥 Lista de Compañeros</h2>
             <div class="section-block">
@@ -420,7 +461,7 @@
                     <thead><tr><th>#</th><th>Nombre Completo</th><th>Correo</th></tr></thead>
                     <tbody id="tabla-companeros"></tbody>
                 </table>
-                <p style="margin-top:15px; color:#94a3b8; font-size:13px;">💡 Para actualizar la lista, edita el arreglo <strong>"companeros"</strong> en el JavaScript.</p>
+                <p style="margin-top:15px; color:#94a3b8; font-size:13px;">💡 Los correos se generan automáticamente con un DNI ficticio.</p>
             </div>
         </div>
 
@@ -428,59 +469,114 @@
 
     <script>
         // =====================================================
-        // 1. DATOS DE CURSOS
+        // 1. DATOS DE CURSOS (con enlace al sílabo)
         // =====================================================
         const cursos = [
-            { codigo: 'EST315', nombre: 'Gestión de Proyectos TICs', grupo: 'UNICO', obligatorio: true, enlace: '#' },
-            { codigo: 'EST314', nombre: 'Aprendizaje No Supervisado', grupo: 'UNICO', obligatorio: true, enlace: '#' },
-            { codigo: 'EST316', nombre: 'Arquitectura de Redes y Protocolos', grupo: 'UNICO', obligatorio: true, enlace: '#' },
-            { codigo: 'EST210', nombre: 'Modelos Lineales', grupo: 'UNICO', obligatorio: true, enlace: '#' },
-            { codigo: 'EST200', nombre: 'Regresión Lineal y No Lineal', grupo: 'UNICO', obligatorio: true, enlace: '#' },
-            { codigo: 'EST317', nombre: 'Series de Tiempo', grupo: 'UNICO', obligatorio: true, enlace: '#' }
+            {
+                codigo: 'EST315',
+                nombre: 'Gestión de Proyectos TICs',
+                grupo: 'UNICO',
+                obligatorio: true,
+                enlace: '#',
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_GESTION%20DE%20PROYECTOS%20TICS%20-%20MELGAREJO%20BOLIVAR%20ROMEL%20PERCY.pdf'
+            },
+            {
+                codigo: 'EST314',
+                nombre: 'Aprendizaje No Supervisado',
+                grupo: 'UNICO',
+                obligatorio: true,
+                enlace: '#',
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Aprendizaje_no_Supervizado%20-%20ALEMAN%20GONZALES%20LEONID.pdf'
+            },
+            {
+                codigo: 'EST316',
+                nombre: 'Arquitectura de Redes y Protocolos',
+                grupo: 'UNICO',
+                obligatorio: true,
+                enlace: '#',
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Arquitectura%20de%20Redes%20y%20Protocolos%20-%20APAZA%20TARQUI%20ALEJANDRO.pdf'
+            },
+            {
+                codigo: 'EST210',
+                nombre: 'Modelos Lineales',
+                grupo: 'UNICO',
+                obligatorio: true,
+                enlace: '#',
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_MODELOS%20LINEALES%20-%20MORILLOS%20VALDERRAMA%20SANTOS%20OCTAVIO.pdf'
+            },
+            {
+                codigo: 'EST200',
+                nombre: 'Regresión Lineal y No Lineal',
+                grupo: 'UNICO',
+                obligatorio: true,
+                enlace: '#',
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_REGRESION%20LINEAL%20Y%20NO%20LINEAL%20-%20VARGAS%20VALVERDE%20CONFESOR%20MILAN.pdf'
+            },
+            {
+                codigo: 'EST317',
+                nombre: 'Series de Tiempo',
+                grupo: 'UNICO',
+                obligatorio: true,
+                enlace: '#',
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_SERIES%20DE%20TIEMPO%20-%20LLUEN%20VALLEJOS%20CESAR%20AUGUSTO.pdf'
+            }
         ];
 
         // =====================================================
-        // 2. DATOS DE COMPAÑEROS
+        // 2. DATOS DE COMPAÑEROS (con DNI aleatorio fijo)
         // =====================================================
-        const companeros = [
-            { nombre: 'APAZA QUISPE ANTONIO VICENTE', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'ARHUATA MAMANI PATRICIA', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'ARIAS RAMIREZ ALEX', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'CALCINA AQUINO DINA SUSAN', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'COSI COSI ABRAN FRANCO', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'CASTILLO QUILCA ALEX ANGEL', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'CHAVEZ LIMA JHOAN JEREMY', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'CHURA CHAMBILLA RAUL CRISTIAN', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'CHURA PAYE GUIAN MARCO', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'CONDORI BANEGAS JHOSEEP JHOEL', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'CURMILLUNI ANCCO CRISTIAN JOEL', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'CUTIPA CARCASI BRYAN', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'CUTIPA JULI FRANKLIN ANDRES', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'ESCOBEDO ARAPA KENYI BLANCA', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'FLORES NINA ANTONY JHONATAN', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'FONSECA LIZARRAGA CINTHIA YANETH', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'JINEZ INCACUTIPA RONALDHINO', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'MACHACA ATENCIO DENIS ELOY', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'MAMANI PARI BECKHAM MARK ANTONY', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'MAMANI PARI JONATHAN YIMMY', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'MAMANI QUISPE RONALDO', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'MEZA MAMANI CHRISTIAN JOSE', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'PAREDES ENCINAS LUIS BELTRAN', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'QUISPE RAMOS DANIEL JHOSIMAR', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'ROQUE MAMANI VIDMAN RUIS', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'SALCCA LAGAR KEYSI', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'SUAREZ CCAMA LENNIN ALFONSO', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'SULLCAHUAMAN CHAMBI NICOLE GERALDINE', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'SUNI MORALES SMIT ALEXANDER', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'TIQUE ASCENCIO ALEXIS ANTONY', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'TITO CHURA RENZO ROBIÑO', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'VELASQUEZ QUISPE WALDIR YEISON', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'VIDAL FUENTES ANTHONY JORDY', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'VILCA CHAMBILLA BRIGGITTE JHOSSELYN', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'YUJRA CONDORI ELMER IVAN', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'QUISPE VARGAS RENATO', correo: 'estudiante@unap.edu.pe' },
-            { nombre: 'AGUILAR MAMANI ANHELY', correo: 'estudiante@unap.edu.pe' }
+        const nombresCompaneros = [
+            'APAZA QUISPE ANTONIO VICENTE',
+            'ARHUATA MAMANI PATRICIA',
+            'ARIAS RAMIREZ ALEX',
+            'CALCINA AQUINO DINA SUSAN',
+            'COSI COSI ABRAN FRANCO',
+            'CASTILLO QUILCA ALEX ANGEL',
+            'CHAVEZ LIMA JHOAN JEREMY',
+            'CHURA CHAMBILLA RAUL CRISTIAN',
+            'CHURA PAYE GUIAN MARCO',
+            'CONDORI BANEGAS JHOSEEP JHOEL',
+            'CURMILLUNI ANCCO CRISTIAN JOEL',
+            'CUTIPA CARCASI BRYAN',
+            'CUTIPA JULI FRANKLIN ANDRES',
+            'ESCOBEDO ARAPA KENYI BLANCA',
+            'FLORES NINA ANTONY JHONATAN',
+            'FONSECA LIZARRAGA CINTHIA YANETH',
+            'JINEZ INCACUTIPA RONALDHINO',
+            'MACHACA ATENCIO DENIS ELOY',
+            'MAMANI PARI BECKHAM MARK ANTONY',
+            'MAMANI PARI JONATHAN YIMMY',
+            'MAMANI QUISPE RONALDO',
+            'MEZA MAMANI CHRISTIAN JOSE',
+            'PAREDES ENCINAS LUIS BELTRAN',
+            'QUISPE RAMOS DANIEL JHOSIMAR',
+            'ROQUE MAMANI VIDMAN RUIS',
+            'SALCCA LAGAR KEYSI',
+            'SUAREZ CCAMA LENNIN ALFONSO',
+            'SULLCAHUAMAN CHAMBI NICOLE GERALDINE',
+            'SUNI MORALES SMIT ALEXANDER',
+            'TIQUE ASCENCIO ALEXIS ANTONY',
+            'TITO CHURA RENZO ROBIÑO',
+            'VELASQUEZ QUISPE WALDIR YEISON',
+            'VIDAL FUENTES ANTHONY JORDY',
+            'VILCA CHAMBILLA BRIGGITTE JHOSSELYN',
+            'YUJRA CONDORI ELMER IVAN',
+            'QUISPE VARGAS RENATO',
+            'AGUILAR MAMANI ANHELY'
         ];
+
+        // Generar correos con DNI fijo (basado en índice)
+        function generarCorreo(index) {
+            // Generamos un DNI de 8 dígitos usando el índice como semilla
+            const base = 70000000 + (index * 12345) % 100000000;
+            const dni = String(base).padStart(8, '0');
+            return dni + '@est.unap.edu.pe';
+        }
+
+        const companeros = nombresCompaneros.map((nombre, i) => ({
+            nombre: nombre,
+            correo: generarCorreo(i)
+        }));
 
         // =====================================================
         // 3. FUNCIONES DE RENDERIZADO
@@ -499,6 +595,7 @@
                     <span class="etiqueta-obligatorio">OBLIGATORIO</span>
                     <div class="facultad">INGENIERIA ESTADISTICA E INFORMATICA<br>FINESI</div>
                     <a href="${curso.enlace}" class="btn-ingresar">Ingresar →</a>
+                    <a href="${curso.silabo}" target="_blank" class="btn-silabo">📄 Ver sílabo</a>
                 `;
                 container.appendChild(card);
             });
@@ -518,7 +615,20 @@
         }
 
         // =====================================================
-        // 4. NAVEGACIÓN POR PESTAÑAS
+        // 4. CONTADOR DE DÍAS PARA EXAMEN FINAL (ejemplo: 28 de julio)
+        // =====================================================
+        function actualizarContador() {
+            const targetDate = new Date('2026-07-28'); // Fecha del examen final (cambiar según sea)
+            const now = new Date();
+            const diff = Math.ceil((targetDate - now) / (1000 * 60 * 60 * 24));
+            const contador = document.getElementById('contador-examen');
+            if (contador) {
+                contador.textContent = diff > 0 ? diff : '¡Hoy!';
+            }
+        }
+
+        // =====================================================
+        // 5. NAVEGACIÓN POR PESTAÑAS
         // =====================================================
         function showSection(sectionName) {
             document.querySelectorAll('[id^="section-"]').forEach(el => el.style.display = 'none');
@@ -545,11 +655,12 @@
         }
 
         // =====================================================
-        // 5. INICIALIZAR
+        // 6. INICIALIZAR
         // =====================================================
         document.addEventListener('DOMContentLoaded', function() {
             renderCursos();
             renderCompaneros();
+            actualizarContador();
             showSection('inicio');
         });
     </script>
