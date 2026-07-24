@@ -7,8 +7,31 @@
     <style>
         /* --- Reset y Estilos Globales --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background: #f4f7fc; display: flex; min-height: 100vh; }
         
+        /* --- Fondo con marca de agua en toda la página --- */
+        body {
+            background: #f4f7fc;
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed; /* Fijo para que no se desplace al hacer scroll */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://raw.githubusercontent.com/renzotchss301-lgtm/coursRenzo/main/finesi/images.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 70% auto; /* Más grande que antes */
+            opacity: 0.08;
+            filter: grayscale(100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
         /* --- Barra Lateral (Sidebar) --- */
         .sidebar {
             width: 260px;
@@ -45,15 +68,29 @@
             margin-left: 260px;
             padding: 40px 50px;
             width: 100%;
+            position: relative;
+            z-index: 1; /* Para que el contenido esté por encima del fondo */
         }
+
+        /* Fondo semitransparente para tarjetas y bloques, para que se vea la marca de agua */
+        .card-curso, .section-block, .silabo-contenido, .grid-cards .card-curso,
+        #section-inicio .card-curso, #section-inicio > div:last-child {
+            background: rgba(255, 255, 255, 0.85); /* Blanco con transparencia */
+            backdrop-filter: blur(2px); /* Ligero desenfoque para suavizar */
+        }
+
+        /* Aseguramos que el header también sea semitransparente si se desea, pero lo dejamos blanco sólido para legibilidad */
         .main-content header {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px 30px;
+            border-radius: 16px;
+            margin-bottom: 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 20px;
-            margin-bottom: 40px;
         }
+
         .main-content header h1 { color: #0f172a; font-weight: 600; }
         .main-content header .badge { background: #3b82f6; color: white; padding: 5px 15px; border-radius: 30px; font-size: 14px; }
 
@@ -65,7 +102,6 @@
             margin-bottom: 40px;
         }
         .card-curso {
-            background: white;
             border-radius: 16px;
             padding: 20px 20px 25px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -123,7 +159,6 @@
 
         /* --- Secciones de texto --- */
         .section-block {
-            background: white;
             border-radius: 16px;
             padding: 25px 30px;
             margin-top: 30px;
@@ -142,7 +177,6 @@
 
         /* --- Estilos para la lista de sílabos --- */
         .silabo-contenido {
-            background: white;
             border-radius: 16px;
             padding: 30px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -196,32 +230,12 @@
             background: #2563eb;
         }
 
-        /* ========== MARCA DE AGUA CON IMAGEN ========== */
-        #section-inicio {
-            position: relative;
-            overflow: hidden;
-        }
-        #section-inicio::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            /* Usamos la URL raw de la imagen */
-            background-image: url('https://raw.githubusercontent.com/renzotchss301-lgtm/coursRenzo/main/finesi/images.jpg');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain; /* Para que no se recorte y se vea completa */
-            opacity: 0.08; /* Muy baja opacidad para que sea sutil */
-            filter: grayscale(100%); /* La convertimos a blanco y negro */
-            pointer-events: none; /* Para que no interfiera con clics */
-            z-index: 0;
-        }
-        /* Asegura que el contenido quede por encima */
-        #section-inicio > * {
-            position: relative;
-            z-index: 1;
+        /* Estilo para el mensaje de bienvenida en Inicio */
+        #section-inicio > div:last-child {
+            background: rgba(224, 242, 254, 0.85); /* Fondo semitransparente */
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #bae6fd;
         }
 
         /* --- Responsive --- */
@@ -235,6 +249,9 @@
             }
             .btn-descargar {
                 align-self: flex-start;
+            }
+            body::before {
+                background-size: 90% auto; /* En móviles se ve más grande */
             }
         }
     </style>
@@ -263,7 +280,7 @@
             <span class="badge">2026 - I</span>
         </header>
 
-        <!-- ========== SECCIÓN INICIO (con marca de agua) ========== -->
+        <!-- ========== SECCIÓN INICIO ========== -->
         <div id="section-inicio">
             <div class="grid-cards">
                 <div class="card-curso" style="border-left: 6px solid #3b82f6; padding:25px;">
@@ -282,7 +299,7 @@
                     <a class="btn-ingresar" style="background:#f59e0b;" onclick="showSection('companeros')">Lista →</a>
                 </div>
             </div>
-            <div style="background:#e0f2fe; padding:20px; border-radius:16px; border:1px solid #bae6fd; position:relative; z-index:1;">
+            <div style="position:relative; z-index:1;">
                 <p style="color:#0369a1;">📌 <strong>Bienvenido a tu Intranet Personal.</strong> Aquí tienes acceso a todos tus cursos, sílabos, docentes y compañeros.</p>
             </div>
         </div>
@@ -295,7 +312,7 @@
             </div>
         </div>
 
-        <!-- ========== SECCIÓN SÍLABOS (SOLO LISTA DE DESCARGA) ========== -->
+        <!-- ========== SECCIÓN SÍLABOS ========== -->
         <div id="section-silabos" style="display:none;">
             <h2 style="color:#0f172a; margin-bottom:20px;">📄 Sílabos Oficiales</h2>
             <div class="silabo-contenido">
