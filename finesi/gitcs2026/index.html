@@ -196,6 +196,50 @@
             background: #2563eb;
         }
 
+        /* ========== MARCA DE AGUA EN LA SECCIÓN INICIO ========== */
+        #section-inicio {
+            position: relative;
+            overflow: hidden;
+        }
+        /* Opción 1: Usar una imagen (descomenta y cambia la ruta) */
+        /*
+        #section-inicio::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('ruta/a/tu/logo-finesi.png'); /* Cambia por la ruta de tu logo */
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.10; /* Ajusta la opacidad (0.0 a 1.0) */
+            pointer-events: none;
+            z-index: 0;
+        }
+        */
+        /* Opción 2: Usar texto (actualmente activa) */
+        #section-inicio::before {
+            content: "FINESI";
+            font-size: 200px;
+            font-weight: 900;
+            color: #0f172a;
+            opacity: 0.05;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+        }
+        /* Asegura que el contenido quede por encima */
+        #section-inicio > * {
+            position: relative;
+            z-index: 1;
+        }
+
         /* --- Responsive --- */
         @media (max-width: 768px) {
             .sidebar { width: 100%; height: auto; position: relative; }
@@ -207,6 +251,9 @@
             }
             .btn-descargar {
                 align-self: flex-start;
+            }
+            #section-inicio::before {
+                font-size: 100px; /* Reducimos el tamaño en móviles */
             }
         }
     </style>
@@ -224,7 +271,7 @@
             <a onclick="showSection('companeros')">👥 Compañeros</a>
         </nav>
         <div style="margin-top: 40px; font-size: 13px; color: #94a3b8; border-top: 1px solid #1e293b; padding-top: 20px;">
-            <p>Universidad Nacional del Altiplano<br><strong style="color:white;">FINESI - Ingeniería Estadística e Informática</strong></p>
+            <p>Universidad Nacional del Altiplano<br><strong style="color:white;">FINESI - Ingeniería Estadística</strong></p>
         </div>
     </aside>
 
@@ -235,7 +282,7 @@
             <span class="badge">2026 - I</span>
         </header>
 
-        <!-- ========== SECCIÓN INICIO ========== -->
+        <!-- ========== SECCIÓN INICIO (con marca de agua) ========== -->
         <div id="section-inicio">
             <div class="grid-cards">
                 <div class="card-curso" style="border-left: 6px solid #3b82f6; padding:25px;">
@@ -254,7 +301,7 @@
                     <a class="btn-ingresar" style="background:#f59e0b;" onclick="showSection('companeros')">Lista →</a>
                 </div>
             </div>
-            <div style="background:#e0f2fe; padding:20px; border-radius:16px; border:1px solid #bae6fd;">
+            <div style="background:#e0f2fe; padding:20px; border-radius:16px; border:1px solid #bae6fd; position:relative; z-index:1;">
                 <p style="color:#0369a1;">📌 <strong>Bienvenido a tu Intranet Personal.</strong> Aquí tienes acceso a todos tus cursos, sílabos, docentes y compañeros.</p>
             </div>
         </div>
@@ -273,7 +320,7 @@
             <div class="silabo-contenido">
                 <heading>📚 Descarga los sílabos de todos tus cursos</heading>
                 
-                <!-- EST315 - Gestión de Proyectos TICs (NUEVO ENLACE) -->
+                <!-- EST315 - Gestión de Proyectos TICs -->
                 <div class="silabo-item">
                     <div class="silabo-info">
                         <span class="codigo">EST315</span>
