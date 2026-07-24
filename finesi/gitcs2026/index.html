@@ -184,6 +184,29 @@
         th { text-align: left; padding: 12px 10px; background: #f8fafc; color: #475569; font-weight: 600; }
         td { padding: 12px 10px; border-bottom: 1px solid #e2e8f0; color: #1e293b; }
 
+        /* --- Tabla de horario --- */
+        .horario-tabla {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .horario-tabla th {
+            background: #0f172a;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .horario-tabla td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            vertical-align: middle;
+            text-align: center;
+            background: rgba(255,255,255,0.7);
+        }
+        .horario-tabla .hora { font-weight: 600; color: #0f172a; background: #f1f5f9; }
+        .horario-tabla .curso-nombre { font-weight: 600; }
+        .horario-tabla .curso-codigo { font-size: 12px; color: #3b82f6; }
+
         .docente-perfil { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
         .docente-perfil .avatar {
             width: 60px; height: 60px; border-radius: 50%;
@@ -247,6 +270,8 @@
             .silabo-item { flex-direction: column; align-items: flex-start; gap: 10px; }
             .btn-descargar { align-self: flex-start; }
             body::before { background-size: 90% auto; }
+            .horario-tabla { font-size: 12px; }
+            .horario-tabla th, .horario-tabla td { padding: 6px; }
         }
     </style>
 </head>
@@ -258,6 +283,8 @@
         <nav>
             <a class="active" onclick="showSection('inicio')">🏠 Inicio</a>
             <a onclick="showSection('cursos')">📚 Mis Cursos</a>
+            <a onclick="showSection('silabos')">📄 Sílabos</a>
+            <a onclick="showSection('horario')">📅 Horario</a>
             <a onclick="showSection('docente')">👨‍🏫 Plana Docente</a>
             <a onclick="showSection('companeros')">👥 Compañeros</a>
         </nav>
@@ -288,47 +315,29 @@
                     <p style="color:#64748b; margin:5px 0 15px;">Descarga los programas oficiales</p>
                     <a class="btn-ingresar" style="background:#10b981;" onclick="showSection('silabos')">Ver sílabos →</a>
                 </div>
+                <!-- Tarjeta: Horario -->
+                <div class="card-curso" style="border-left: 6px solid #8b5cf6; padding:25px;">
+                    <h3>📅 Horario</h3>
+                    <p style="color:#64748b; margin:5px 0 15px;">Consulta tu horario de clases</p>
+                    <a class="btn-ingresar" style="background:#8b5cf6;" onclick="showSection('horario')">Ver horario →</a>
+                </div>
                 <!-- Tarjeta: Compañeros -->
                 <div class="card-curso" style="border-left: 6px solid #f59e0b; padding:25px;">
                     <h3>👥 Compañeros</h3>
                     <p style="color:#64748b; margin:5px 0 15px;">Conecta con tu clase</p>
                     <a class="btn-ingresar" style="background:#f59e0b;" onclick="showSection('companeros')">Lista →</a>
                 </div>
-                <!-- NUEVA: Horario -->
-                <div class="card-curso" style="border-left: 6px solid #8b5cf6; padding:25px;">
-                    <h3>📅 Horario</h3>
-                    <p style="color:#64748b; margin:5px 0 15px;">Consulta tu horario de clases</p>
-                    <a href="#" class="btn-ingresar" style="background:#8b5cf6;">Ver horario →</a>
-                </div>
-                <!-- NUEVA: Asistencia -->
+                <!-- Tarjeta: Asistencia (ejemplo) -->
                 <div class="card-curso" style="border-left: 6px solid #ef4444; padding:25px;">
                     <h3>✅ Asistencia</h3>
                     <p style="color:#64748b; margin:5px 0 15px;">Registro de asistencia a clases</p>
                     <a href="#" class="btn-ingresar" style="background:#ef4444;">Ver asistencia →</a>
                 </div>
-                <!-- NUEVA: Calendario Académico -->
+                <!-- Tarjeta: Calendario Académico -->
                 <div class="card-curso" style="border-left: 6px solid #06b6d4; padding:25px;">
                     <h3>📆 Calendario Académico</h3>
                     <p style="color:#64748b; margin:5px 0 15px;">Fechas importantes del semestre</p>
                     <a href="#" class="btn-ingresar" style="background:#06b6d4;">Ver calendario →</a>
-                </div>
-                <!-- NUEVA: Avisos -->
-                <div class="card-curso" style="border-left: 6px solid #f43f5e; padding:25px;">
-                    <h3>📢 Avisos</h3>
-                    <p style="color:#64748b; margin:5px 0 15px;">Comunicados oficiales</p>
-                    <a href="#" class="btn-ingresar" style="background:#f43f5e;">Ver avisos →</a>
-                </div>
-                <!-- NUEVA: Recursos -->
-                <div class="card-curso" style="border-left: 6px solid #14b8a6; padding:25px;">
-                    <h3>📚 Recursos</h3>
-                    <p style="color:#64748b; margin:5px 0 15px;">Biblioteca, herramientas, guías</p>
-                    <a href="#" class="btn-ingresar" style="background:#14b8a6;">Ver recursos →</a>
-                </div>
-                <!-- NUEVA: Próximos eventos -->
-                <div class="card-curso" style="border-left: 6px solid #f97316; padding:25px;">
-                    <h3>🏆 Próximos Eventos</h3>
-                    <p style="color:#64748b; margin:5px 0 15px;">Actividades y fechas importantes</p>
-                    <a href="#" class="btn-ingresar" style="background:#f97316;">Ver eventos →</a>
                 </div>
             </div>
 
@@ -351,7 +360,7 @@
 
             <!-- Mensaje de bienvenida -->
             <div style="margin-top: 30px;">
-                <p style="color:#0369a1;">📌 <strong>Bienvenido a tu Intranet Personal.</strong> Aquí tienes acceso a todos tus cursos, sílabos, docentes y compañeros.</p>
+                <p style="color:#0369a1;">📌 <strong>Bienvenido a tu Intranet Personal.</strong> Aquí tienes acceso a todos tus cursos, sílabos, horario, docentes y compañeros.</p>
             </div>
         </div>
 
@@ -368,7 +377,7 @@
             <h2 style="color:#0f172a; margin-bottom:20px;">📄 Sílabos Oficiales</h2>
             <div class="silabo-contenido">
                 <heading>📚 Descarga los sílabos de todos tus cursos</heading>
-                <!-- Los items se generan manualmente aquí, pero también podrían ser dinámicos -->
+                <!-- Los items se generan manualmente, pero también podrían ser dinámicos -->
                 <div class="silabo-item">
                     <div class="silabo-info">
                         <span class="codigo">EST315</span>
@@ -420,6 +429,69 @@
             </div>
         </div>
 
+        <!-- ========== SECCIÓN HORARIO ========== -->
+        <div id="section-horario" style="display:none;">
+            <h2 style="color:#0f172a; margin-bottom:20px;">📅 Horario de Clases</h2>
+            <div class="section-block" style="overflow-x:auto;">
+                <table class="horario-tabla">
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Lunes</th>
+                            <th>Martes</th>
+                            <th>Miércoles</th>
+                            <th>Jueves</th>
+                            <th>Viernes</th>
+                            <th>Sábado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="hora">1:00 PM</td>
+                            <td rowspan="2" style="background:#dbeafe;"><span class="curso-nombre">Modelos Lineales</span><br><span class="curso-codigo">EST210</span></td>
+                            <td rowspan="2" style="background:#dbeafe;"><span class="curso-nombre">Modelos Lineales</span><br><span class="curso-codigo">EST210</span></td>
+                            <td rowspan="3" style="background:#fce7f3;"><span class="curso-nombre">Series de Tiempo</span><br><span class="curso-codigo">EST317</span></td>
+                            <td rowspan="2" style="background:#dbeafe;"><span class="curso-nombre">Modelos Lineales</span><br><span class="curso-codigo">EST210</span></td>
+                            <td rowspan="3" style="background:#fce7f3;"><span class="curso-nombre">Series de Tiempo</span><br><span class="curso-codigo">EST317</span></td>
+                            <td rowspan="3" style="background:#d1fae5;"><span class="curso-nombre">Aprendizaje No Supervisado</span><br><span class="curso-codigo">EST314</span></td>
+                        </tr>
+                        <tr><td class="hora">2:00 PM</td></tr>
+                        <tr>
+                            <td class="hora">3:00 PM</td>
+                            <td rowspan="2" style="background:#d1fae5;"><span class="curso-nombre">Aprendizaje No Supervisado</span><br><span class="curso-codigo">EST314</span></td>
+                            <td rowspan="2" style="background:#fef3c7;"><span class="curso-nombre">Arquitectura de Redes</span><br><span class="curso-codigo">EST316</span></td>
+                            <td rowspan="3" style="background:#fef3c7;"><span class="curso-nombre">Regresión Lineal</span><br><span class="curso-codigo">EST200</span></td>
+                            <td rowspan="2" style="background:#fef3c7;"><span class="curso-nombre">Arquitectura de Redes</span><br><span class="curso-codigo">EST316</span></td>
+                            <td rowspan="3" style="background:#fef3c7;"><span class="curso-nombre">Gestión de Proyectos</span><br><span class="curso-codigo">EST315</span></td>
+                        </tr>
+                        <tr>
+                            <td class="hora">4:00 PM</td>
+                            <td rowspan="3" style="background:#fef3c7;"><span class="curso-nombre">Regresión Lineal</span><br><span class="curso-codigo">EST200</span></td>
+                            <td rowspan="3" style="background:#fef3c7;"><span class="curso-nombre">Gestión de Proyectos</span><br><span class="curso-codigo">EST315</span></td>
+                        </tr>
+                        <tr>
+                            <td class="hora">5:00 PM</td>
+                            <td rowspan="2" style="background:#fce7f3;"><span class="curso-nombre">Series de Tiempo</span><br><span class="curso-codigo">EST317</span></td>
+                            <td rowspan="2" style="background:#fef3c7;"><span class="curso-nombre">Regresión Lineal</span><br><span class="curso-codigo">EST200</span></td>
+                            <td rowspan="2" style="background:#fef3c7;"><span class="curso-nombre">Arquitectura de Redes</span><br><span class="curso-codigo">EST316</span></td>
+                        </tr>
+                        <tr>
+                            <td class="hora">6:00 PM</td>
+                            <td style="background:#fef3c7;"><span class="curso-nombre">Gestión de Proyectos</span><br><span class="curso-codigo">EST315</span></td>
+                            <td style="background:#fef3c7;"><span class="curso-nombre">Gestión de Proyectos</span><br><span class="curso-codigo">EST315</span></td>
+                            <td style="background:#fef3c7;"><span class="curso-nombre">Gestión de Proyectos</span><br><span class="curso-codigo">EST315</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 15px; color: #64748b; font-size: 14px;">
+                    <span style="display:inline-block; background:#dbeafe; padding:2px 10px; border-radius:12px;">Modelos Lineales (EST210)</span>
+                    <span style="display:inline-block; background:#d1fae5; padding:2px 10px; border-radius:12px;">Aprendizaje No Supervisado (EST314)</span>
+                    <span style="display:inline-block; background:#fce7f3; padding:2px 10px; border-radius:12px;">Series de Tiempo (EST317)</span>
+                    <span style="display:inline-block; background:#fef3c7; padding:2px 10px; border-radius:12px;">Arquitectura de Redes (EST316) / Regresión Lineal (EST200) / Gestión de Proyectos (EST315)</span>
+                </p>
+            </div>
+        </div>
+
         <!-- ========== SECCIÓN DOCENTE ========== -->
         <div id="section-docente" style="display:none;">
             <h2 style="color:#0f172a; margin-bottom:20px;">👨‍🏫 Plana Docente</h2>
@@ -431,28 +503,28 @@
                 <hr style="margin:20px 0;">
                 <div class="docente-perfil">
                     <div class="avatar" style="background:#10b981;">👩‍🏫</div>
-                    <div><h3>ALEMAN GONZALES LEONID</h3><p style="color:#64748b;">Docente - Aprendizaje No Supervisado</p></div>
+                    <div><h3>Aleman Gonzales Leonid</h3><p style="color:#64748b;">Docente - Aprendizaje No Supervisado</p></div>
                 </div>
                 <div class="docente-perfil">
                     <div class="avatar" style="background:#8b5cf6;">👨‍🏫</div>
-                    <div><h3>APAZA TARQUI ALEJANDRO</h3><p style="color:#64748b;">Docente - Arquitectura de Redes y Protocolos</p></div>
+                    <div><h3>Apaza Tarqui Alejandro</h3><p style="color:#64748b;">Docente - Arquitectura de Redes y Protocolos</p></div>
                 </div>
                 <div class="docente-perfil">
                     <div class="avatar" style="background:#f59e0b;">👨‍🏫</div>
-                    <div><h3>MORILLOS VALDERRAMA SANTOS OCTAVIO</h3><p style="color:#64748b;">Docente - Modelos Lineales</p></div>
+                    <div><h3>Morillos Valderrama Santos Octavio</h3><p style="color:#64748b;">Docente - Modelos Lineales</p></div>
                 </div>
                 <div class="docente-perfil">
                     <div class="avatar" style="background:#ef4444;">👨‍🏫</div>
-                    <div><h3>VARGAS VALVERDE CONFESOR MILAN</h3><p style="color:#64748b;">Docente - Regresión Lineal y No Lineal</p></div>
+                    <div><h3>Vargas Valverde Confesor Milan</h3><p style="color:#64748b;">Docente - Regresión Lineal y No Lineal</p></div>
                 </div>
                 <div class="docente-perfil">
                     <div class="avatar" style="background:#06b6d4;">👨‍🏫</div>
-                    <div><h3>LLUEN VALLEJOS CESAR AUGUSTO</h3><p style="color:#64748b;">Docente - Series de Tiempo</p></div>
+                    <div><h3>Lluen Vallejos Cesar Augusto</h3><p style="color:#64748b;">Docente - Series de Tiempo</p></div>
                 </div>
             </div>
         </div>
 
-        <!-- ========== SECCIÓN COMPAÑEROS (con correos generados) ========== -->
+        <!-- ========== SECCIÓN COMPAÑEROS ========== -->
         <div id="section-companeros" style="display:none;">
             <h2 style="color:#0f172a; margin-bottom:20px;">👥 Lista de Compañeros</h2>
             <div class="section-block">
@@ -564,9 +636,7 @@
             'AGUILAR MAMANI ANHELY'
         ];
 
-        // Generar correos con DNI fijo (basado en índice)
         function generarCorreo(index) {
-            // Generamos un DNI de 8 dígitos usando el índice como semilla
             const base = 70000000 + (index * 12345) % 100000000;
             const dni = String(base).padStart(8, '0');
             return dni + '@est.unap.edu.pe';
@@ -614,10 +684,10 @@
         }
 
         // =====================================================
-        // 4. CONTADOR DE DÍAS PARA EXAMEN FINAL (ejemplo: 28 de julio)
+        // 4. CONTADOR DE DÍAS PARA EXAMEN FINAL
         // =====================================================
         function actualizarContador() {
-            const targetDate = new Date('2026-07-28'); // Fecha del examen final (cambiar según sea)
+            const targetDate = new Date('2026-07-28');
             const now = new Date();
             const diff = Math.ceil((targetDate - now) / (1000 * 60 * 60 * 24));
             const contador = document.getElementById('contador-examen');
@@ -647,6 +717,7 @@
                 'inicio': '📋 Panel de Control',
                 'cursos': '📚 Mis Cursos',
                 'silabos': '📄 Sílabos',
+                'horario': '📅 Horario',
                 'docente': '👨‍🏫 Plana Docente',
                 'companeros': '👥 Compañeros'
             };
