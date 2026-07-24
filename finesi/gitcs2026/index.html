@@ -299,40 +299,34 @@
             <span class="badge">2026 - I</span>
         </header>
 
-        <!-- ========== SECCIÓN INICIO (Panel de Control) ========== -->
+        <!-- ========== SECCIÓN INICIO ========== -->
         <div id="section-inicio">
             <div class="grid-cards">
-                <!-- Tarjeta: Cursos Activos -->
                 <div class="card-curso" style="border-left: 6px solid #3b82f6; padding:25px;">
                     <h3>📚 Cursos Activos</h3>
                     <p style="color:#64748b; margin:5px 0 15px;">Tienes <strong id="totalCursos">6</strong> cursos matriculados</p>
                     <a class="btn-ingresar" style="background:#64748b;" onclick="showSection('cursos')">Ver todos →</a>
                 </div>
-                <!-- Tarjeta: Sílabos -->
                 <div class="card-curso" style="border-left: 6px solid #10b981; padding:25px;">
                     <h3>📄 Sílabos</h3>
                     <p style="color:#64748b; margin:5px 0 15px;">Descarga los programas oficiales</p>
                     <a class="btn-ingresar" style="background:#10b981;" onclick="showSection('silabos')">Ver sílabos →</a>
                 </div>
-                <!-- Tarjeta: Horario -->
                 <div class="card-curso" style="border-left: 6px solid #8b5cf6; padding:25px;">
                     <h3>📅 Horario</h3>
                     <p style="color:#64748b; margin:5px 0 15px;">Consulta tu horario de clases</p>
                     <a class="btn-ingresar" style="background:#8b5cf6;" onclick="showSection('horario')">Ver horario →</a>
                 </div>
-                <!-- Tarjeta: Compañeros -->
                 <div class="card-curso" style="border-left: 6px solid #f59e0b; padding:25px;">
                     <h3>👥 Compañeros</h3>
                     <p style="color:#64748b; margin:5px 0 15px;">Conecta con tu clase</p>
                     <a class="btn-ingresar" style="background:#f59e0b;" onclick="showSection('companeros')">Lista →</a>
                 </div>
-                <!-- Tarjeta: Asistencia (ejemplo) -->
                 <div class="card-curso" style="border-left: 6px solid #ef4444; padding:25px;">
                     <h3>✅ Asistencia</h3>
                     <p style="color:#64748b; margin:5px 0 15px;">Registro de asistencia a clases</p>
                     <a href="#" class="btn-ingresar" style="background:#ef4444;">Ver asistencia →</a>
                 </div>
-                <!-- Tarjeta: Calendario Académico -->
                 <div class="card-curso" style="border-left: 6px solid #06b6d4; padding:25px;">
                     <h3>📆 Calendario Académico</h3>
                     <p style="color:#64748b; margin:5px 0 15px;">Fechas importantes del semestre</p>
@@ -363,7 +357,7 @@
             </div>
         </div>
 
-        <!-- ========== SECCIÓN CURSOS (con botón a sílabo) ========== -->
+        <!-- ========== SECCIÓN CURSOS ========== -->
         <div id="section-cursos" style="display:none;">
             <h2 style="color:#0f172a; margin-bottom:20px;">📚 Mis Cursos</h2>
             <div id="cursosContainer" class="grid-cards">
@@ -371,12 +365,11 @@
             </div>
         </div>
 
-        <!-- ========== SECCIÓN SÍLABOS (lista de descarga) ========== -->
+        <!-- ========== SECCIÓN SÍLABOS ========== -->
         <div id="section-silabos" style="display:none;">
             <h2 style="color:#0f172a; margin-bottom:20px;">📄 Sílabos Oficiales</h2>
             <div class="silabo-contenido">
                 <heading>📚 Descarga los sílabos de todos tus cursos</heading>
-                <!-- Los items se generan manualmente, pero también podrían ser dinámicos -->
                 <div class="silabo-item">
                     <div class="silabo-info">
                         <span class="codigo">EST315</span>
@@ -428,7 +421,7 @@
             </div>
         </div>
 
-        <!-- ========== SECCIÓN HORARIO (MODIFICADA: SIN SÁBADO) ========== -->
+        <!-- ========== SECCIÓN HORARIO (SIN VIERNES) ========== -->
         <div id="section-horario" style="display:none;">
             <h2 style="color:#0f172a; margin-bottom:20px;">📅 Horario de Clases</h2>
             <div class="section-block" style="overflow-x:auto;">
@@ -440,7 +433,6 @@
                             <th>Martes</th>
                             <th>Miércoles</th>
                             <th>Jueves</th>
-                            <th>Viernes</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -450,7 +442,6 @@
                             <td rowspan="2" style="background:#dbeafe;"><span class="curso-nombre">Modelos Lineales</span><br><span class="curso-codigo">EST210</span></td>
                             <td rowspan="3" style="background:#fce7f3;"><span class="curso-nombre">Series de Tiempo</span><br><span class="curso-codigo">EST317</span></td>
                             <td rowspan="2" style="background:#dbeafe;"><span class="curso-nombre">Modelos Lineales</span><br><span class="curso-codigo">EST210</span></td>
-                            <td rowspan="3" style="background:#fce7f3;"><span class="curso-nombre">Series de Tiempo</span><br><span class="curso-codigo">EST317</span></td>
                         </tr>
                         <tr><td class="hora">2:00 PM</td></tr>
                         <tr>
@@ -459,7 +450,6 @@
                             <td rowspan="2" style="background:#fef3c7;"><span class="curso-nombre">Arquitectura de Redes</span><br><span class="curso-codigo">EST316</span></td>
                             <td rowspan="3" style="background:#fef3c7;"><span class="curso-nombre">Regresión Lineal</span><br><span class="curso-codigo">EST200</span></td>
                             <td rowspan="2" style="background:#fef3c7;"><span class="curso-nombre">Arquitectura de Redes</span><br><span class="curso-codigo">EST316</span></td>
-                            <td rowspan="3" style="background:#fef3c7;"><span class="curso-nombre">Gestión de Proyectos</span><br><span class="curso-codigo">EST315</span></td>
                         </tr>
                         <tr>
                             <td class="hora">4:00 PM</td>
@@ -474,6 +464,8 @@
                         </tr>
                         <tr>
                             <td class="hora">6:00 PM</td>
+                            <td style="background:#fef3c7;"><span class="curso-nombre">Gestión de Proyectos</span><br><span class="curso-codigo">EST315</span></td>
+                            <td style="background:#fef3c7;"><span class="curso-nombre">Gestión de Proyectos</span><br><span class="curso-codigo">EST315</span></td>
                             <td style="background:#fef3c7;"><span class="curso-nombre">Gestión de Proyectos</span><br><span class="curso-codigo">EST315</span></td>
                         </tr>
                     </tbody>
@@ -535,7 +527,7 @@
 
     <script>
         // =====================================================
-        // 1. DATOS DE CURSOS (con enlace al sílabo)
+        // 1. DATOS DE CURSOS
         // =====================================================
         const cursos = [
             {
@@ -589,7 +581,7 @@
         ];
 
         // =====================================================
-        // 2. DATOS DE COMPAÑEROS (con DNI aleatorio fijo)
+        // 2. COMPAÑEROS
         // =====================================================
         const nombresCompaneros = [
             'APAZA QUISPE ANTONIO VICENTE',
@@ -643,7 +635,7 @@
         }));
 
         // =====================================================
-        // 3. FUNCIONES DE RENDERIZADO
+        // 3. FUNCIONES
         // =====================================================
         function renderCursos() {
             const container = document.getElementById('cursosContainer');
@@ -663,8 +655,7 @@
                 `;
                 container.appendChild(card);
             });
-            const totalSpan = document.getElementById('totalCursos');
-            if (totalSpan) totalSpan.textContent = cursos.length;
+            document.getElementById('totalCursos').textContent = cursos.length;
         }
 
         function renderCompaneros() {
@@ -678,22 +669,14 @@
             });
         }
 
-        // =====================================================
-        // 4. CONTADOR DE DÍAS PARA EXAMEN FINAL
-        // =====================================================
         function actualizarContador() {
-            const targetDate = new Date('2026-07-28');
+            const target = new Date('2026-07-28');
             const now = new Date();
-            const diff = Math.ceil((targetDate - now) / (1000 * 60 * 60 * 24));
-            const contador = document.getElementById('contador-examen');
-            if (contador) {
-                contador.textContent = diff > 0 ? diff : '¡Hoy!';
-            }
+            const diff = Math.ceil((target - now) / (1000*60*60*24));
+            const el = document.getElementById('contador-examen');
+            if (el) el.textContent = diff > 0 ? diff : '¡Hoy!';
         }
 
-        // =====================================================
-        // 5. NAVEGACIÓN POR PESTAÑAS
-        // =====================================================
         function showSection(sectionName) {
             document.querySelectorAll('[id^="section-"]').forEach(el => el.style.display = 'none');
             const target = document.getElementById('section-' + sectionName);
@@ -708,7 +691,7 @@
             });
 
             const headerTitle = document.getElementById('headerTitle');
-            const mapTitles = {
+            const map = {
                 'inicio': '📋 Panel de Control',
                 'cursos': '📚 Mis Cursos',
                 'silabos': '📄 Sílabos',
@@ -716,11 +699,11 @@
                 'docente': '👨‍🏫 Plana Docente',
                 'companeros': '👥 Compañeros'
             };
-            headerTitle.textContent = mapTitles[sectionName] || '📋 Panel de Control';
+            headerTitle.textContent = map[sectionName] || '📋 Panel de Control';
         }
 
         // =====================================================
-        // 6. INICIALIZAR
+        // 4. INICIALIZAR
         // =====================================================
         document.addEventListener('DOMContentLoaded', function() {
             renderCursos();
@@ -729,6 +712,5 @@
             showSection('inicio');
         });
     </script>
-
 </body>
 </html>
