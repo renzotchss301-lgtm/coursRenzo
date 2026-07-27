@@ -1,603 +1,800 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aula Virtual · FINESI · VI Ciclo</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTRANET - Gestión de Proyectos TICs</title>
     <style>
-        /* ===== RESET Y BASE ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* --- Reset y Estilos Globales --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
 
+        /* --- Fondo con marca de agua en toda la página --- */
         body {
-            font-family: 'Inter', sans-serif;
-            background: #f0f4f8;
-            color: #1e293b;
-            line-height: 1.7;
-            padding: 1.5rem 1rem;
+            background: #f4f7fc;
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://raw.githubusercontent.com/renzotchss301-lgtm/coursRenzo/main/finesi/images.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 70% auto;
+            opacity: 0.08;
+            filter: grayscale(100%);
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 28px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+        /* --- Barra Lateral --- */
+        .sidebar {
+            width: 260px;
+            background: #0f172a;
+            color: white;
+            padding: 30px 20px;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
         }
-
-        /* ===== CABECERA ===== */
-        .header {
+        .sidebar h2 {
+            font-weight: 300;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 28px;
+            letter-spacing: 2px;
             display: flex;
             align-items: center;
-            gap: 2rem;
-            padding-bottom: 1.8rem;
-            border-bottom: 2px solid #e9edf2;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
+            gap: 10px;
         }
-
-        .header-logo {
-            flex-shrink: 0;
-        }
-        .header-logo img {
-            max-height: 80px;
+        .sidebar h2 img {
+            height: 35px;
             width: auto;
-            border-radius: 12px;
+            border-radius: 6px;
+            border: 1px solid #334155;
         }
-
-        .header-info h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #0f172a;
-            letter-spacing: -0.02em;
-        }
-        .header-info .subtitle {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: #3b82f6;
-            margin: 0.2rem 0 0.1rem;
-        }
-        .header-info .meta {
-            color: #64748b;
-            font-size: 0.95rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.2rem;
-            margin-top: 0.3rem;
-        }
-        .header-info .meta i {
-            color: #3b82f6;
-            width: 1.2rem;
-        }
-
-        /* ===== PESTAÑAS ===== */
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.3rem;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid #e9edf2;
-            padding-bottom: 0.8rem;
-        }
-
-        .tab-btn {
-            background: transparent;
-            border: none;
-            padding: 0.6rem 1.6rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #64748b;
-            cursor: pointer;
-            border-radius: 40px;
+        .sidebar h2 span { font-weight: 600; color: #60a5fa; }
+        .sidebar nav a {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
             transition: all 0.2s;
+            font-weight: 500;
+            cursor: pointer;
         }
-        .tab-btn:hover {
-            background: #f1f5f9;
-            color: #0f172a;
+        .sidebar nav a:hover, .sidebar nav a.active {
+            background: #1e293b;
+            color: white;
+            padding-left: 20px;
         }
-        .tab-btn.active {
+
+        /* --- Contenido Principal --- */
+        .main-content {
+            margin-left: 260px;
+            padding: 40px 50px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        .main-content header {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px 30px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .main-content header h1 { color: #0f172a; font-weight: 600; }
+        .main-content header .badge { background: #3b82f6; color: white; padding: 5px 15px; border-radius: 30px; font-size: 14px; }
+
+        /* --- Tarjetas generales --- */
+        .card-curso, .section-block, .silabo-contenido,
+        #section-inicio .card-curso, #section-inicio > div:last-child {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(2px);
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .card-curso {
+            border-radius: 16px;
+            padding: 20px 20px 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #eef2f6;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-curso:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); }
+        .card-curso .codigo {
+            font-size: 14px;
+            font-weight: 700;
+            color: #3b82f6;
+            background: #eff6ff;
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+            align-self: flex-start;
+        }
+        .card-curso h3 { color: #0f172a; font-size: 18px; margin-bottom: 5px; }
+        .card-curso .grupo { color: #64748b; font-size: 14px; margin-bottom: 12px; }
+        .card-curso .facultad {
+            color: #94a3b8;
+            font-size: 13px;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 12px;
+            margin-top: 5px;
+        }
+        .card-curso .etiqueta-obligatorio {
+            background: #dcfce7;
+            color: #166534;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 12px;
+            border-radius: 30px;
+            align-self: flex-start;
+            margin-bottom: 12px;
+        }
+        .btn-ingresar, .btn-silabo {
+            border: none;
+            padding: 10px 0;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            margin-top: 8px;
+        }
+        .btn-ingresar {
             background: #3b82f6;
             color: white;
         }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease;
+        .btn-ingresar:hover { background: #2563eb; }
+        .btn-silabo {
+            background: #10b981;
+            color: white;
         }
-        .tab-content.active {
-            display: block;
-        }
+        .btn-silabo:hover { background: #059669; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* --- Secciones --- */
+        .section-block {
+            border-radius: 16px;
+            padding: 25px 30px;
+            margin-top: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-
-        /* ===== ELEMENTOS COMUNES ===== */
-        h2 {
-            font-size: 1.7rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+        .section-block h2 {
             color: #0f172a;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
+            margin-bottom: 20px;
+            border-left: 6px solid #3b82f6;
+            padding-left: 15px;
         }
-        h2 i {
-            color: #3b82f6;
-        }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 12px 10px; background: #f8fafc; color: #475569; font-weight: 600; }
+        td { padding: 12px 10px; border-bottom: 1px solid #e2e8f0; color: #1e293b; }
 
-        h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #0f172a;
-            margin: 1.2rem 0 0.6rem;
-        }
-
-        .text-block {
-            color: #334155;
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-        .text-block p {
-            margin-bottom: 0.8rem;
-        }
-        .text-block ul {
-            padding-left: 1.8rem;
-            list-style-type: none;
-        }
-        .text-block ul li {
-            margin-bottom: 0.4rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-        .text-block ul li::before {
-            content: "▹";
-            color: #3b82f6;
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .card {
-            background: #f8fafc;
-            border: 1px solid #e9edf2;
-            border-radius: 20px;
-            padding: 1.5rem;
-            transition: all 0.25s;
-        }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-            border-color: #cbd5e1;
-        }
-
-        .card .curso-titulo {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #0f172a;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .card .curso-titulo i {
-            color: #3b82f6;
-            font-size: 1.2rem;
-        }
-        .card .curso-docente {
-            color: #475569;
-            font-size: 0.9rem;
-            margin: 0.2rem 0 0.6rem;
-        }
-        .card .curso-docente i {
-            color: #94a3b8;
-            margin-right: 0.2rem;
-        }
-
-        .card .info-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem 1.5rem;
-            font-size: 0.9rem;
-            color: #475569;
-            margin: 0.5rem 0;
-        }
-        .card .info-row i {
-            color: #3b82f6;
-            width: 1.2rem;
-        }
-
-        .card .silabo-link {
-            display: inline-block;
-            margin-top: 0.5rem;
-            color: #3b82f6;
-            font-weight: 600;
-            text-decoration: none;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.2s;
-        }
-        .card .silabo-link:hover {
-            border-bottom-color: #3b82f6;
-        }
-
-        .card .estudiantes-toggle {
-            background: none;
-            border: none;
-            color: #3b82f6;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.9rem;
-            padding: 0.3rem 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-        .card .estudiantes-toggle:hover {
-            text-decoration: underline;
-        }
-
-        .card .estudiantes-lista {
-            margin-top: 0.8rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-        }
-        .card .estudiantes-lista.abierta {
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        .estudiantes-lista table {
+        /* --- Tabla de horario --- */
+        .horario-tabla {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.85rem;
+            font-size: 14px;
         }
-        .estudiantes-lista th {
-            background: #e9edf2;
-            text-align: left;
-            padding: 0.4rem 0.6rem;
-            color: #0f172a;
-            font-weight: 600;
-        }
-        .estudiantes-lista td {
-            padding: 0.3rem 0.6rem;
-            border-bottom: 1px solid #e9edf2;
-        }
-        .estudiantes-lista tr:hover td {
-            background: #f1f5f9;
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            margin-top: 2.5rem;
+        .horario-tabla th {
+            background: #0f172a;
+            color: white;
+            padding: 10px;
             text-align: center;
-            color: #94a3b8;
-            font-size: 0.9rem;
-            border-top: 1px solid #e9edf2;
-            padding-top: 1.8rem;
         }
-        footer i {
-            color: #e74c3c;
+        .horario-tabla td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            vertical-align: middle;
+            text-align: center;
+            background: rgba(255,255,255,0.7);
+        }
+        .horario-tabla .hora { font-weight: 600; color: #0f172a; background: #f1f5f9; }
+        .horario-tabla .curso-nombre { font-weight: 600; }
+        .horario-tabla .curso-codigo { font-size: 12px; color: #3b82f6; }
+
+        .docente-perfil { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .docente-perfil .avatar {
+            width: 60px; height: 60px; border-radius: 50%;
+            background: #3b82f6; color: white; display: flex;
+            align-items: center; justify-content: center; font-size: 28px;
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* --- Sílabos --- */
+        .silabo-contenido {
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .silabo-contenido heading {
+            font-size: 20px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+        .silabo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .silabo-item:last-child { border-bottom: none; }
+        .silabo-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .silabo-info .curso { font-weight: 600; color: #0f172a; }
+        .silabo-info .docente { font-size: 14px; color: #64748b; }
+        .silabo-info .codigo { font-size: 13px; color: #3b82f6; font-weight: 500; }
+        .btn-descargar {
+            background: #3b82f6;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .btn-descargar:hover { background: #2563eb; }
+
+        /* --- Estilo para el mensaje de bienvenida --- */
+        #section-inicio > div:last-child {
+            background: rgba(224, 242, 254, 0.85);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #bae6fd;
+        }
+
+        /* --- Responsive --- */
         @media (max-width: 768px) {
-            .container { padding: 1.5rem; }
-            .header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .header-info h1 { font-size: 1.6rem; }
-            .tab-btn { padding: 0.4rem 1rem; font-size: 0.85rem; }
-            .card-grid { grid-template-columns: 1fr; }
+            .sidebar { width: 100%; height: auto; position: relative; }
+            .main-content { margin-left: 0; padding: 20px; }
+            .silabo-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .btn-descargar { align-self: flex-start; }
+            body::before { background-size: 90% auto; }
+            .horario-tabla { font-size: 12px; }
+            .horario-tabla th, .horario-tabla td { padding: 6px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-
-    <!-- ============================================================ -->
-    <!-- CABECERA                                                       -->
-    <!-- ============================================================ -->
-    <div class="header">
-        <div class="header-logo">
-            <!-- CAMBIO 1: Ruta raw de la imagen -->
-            <img src="https://raw.githubusercontent.com/renzotchss301-lgtm/coursRenzo/main/finesi/images.jpg" alt="Logo FINESI" />
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>
+            <img src="https://raw.githubusercontent.com/renzotchss301-lgtm/coursRenzo/main/finesi/images.jpg" alt="Logo FINESI">
+            <span>INTRANET</span>
+        </h2>
+        <nav>
+            <a class="active" onclick="showSection('inicio')">🏠 Inicio</a>
+            <a onclick="showSection('cursos')">📚 Mis Cursos</a>
+            <a onclick="showSection('horario')">📅 Horario</a>
+            <a onclick="showSection('docente')">👨‍🏫 Plana Docente</a>
+            <a onclick="showSection('companeros')">👥 Compañeros</a>
+        </nav>
+        <div style="margin-top: 40px; font-size: 13px; color: #94a3b8; border-top: 1px solid #1e293b; padding-top: 20px;">
+            <p>Universidad Nacional del Altiplano<br><strong style="color:white;">FINESI - Ingeniería Estadística e Infomática</strong></p>
         </div>
-        <div class="header-info">
-            <h1>Aula Virtual · VI Ciclo</h1>
-            <p class="subtitle">Facultad de Ingeniería Estadística e Informática (FINESI)</p>
-            <p class="meta">
-                <span><i class="fas fa-calendar-alt"></i> Semestre 2026-I</span>
-                <span><i class="fas fa-university"></i> Universidad Nacional del Altiplano - Puno</span>
-                <span><i class="fas fa-globe"></i> Modalidad Presencial</span>
-            </p>
-        </div>
-    </div>
+    </aside>
 
-    <!-- ============================================================ -->
-    <!-- PESTAÑAS                                                       -->
-    <!-- ============================================================ -->
-    <div class="tabs">
-        <button class="tab-btn active" data-tab="inicio"><i class="fas fa-home"></i> Inicio</button>
-        <button class="tab-btn" data-tab="cursos"><i class="fas fa-book"></i> Cursos</button>
-        <button class="tab-btn" data-tab="recursos"><i class="fas fa-folder-open"></i> Recursos</button>
-        <button class="tab-btn" data-tab="evaluacion"><i class="fas fa-clipboard-list"></i> Evaluación</button>
-    </div>
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content" id="mainContent">
+        <header>
+            <h1 id="headerTitle">📋 Panel de Control</h1>
+            <span class="badge">2026 - I</span>
+        </header>
 
-    <!-- ============================================================ -->
-    <!-- TAB 1: INICIO                                                  -->
-    <!-- ============================================================ -->
-    <div id="tab-inicio" class="tab-content active">
-        <h2><i class="fas fa-chalkboard-teacher"></i> Bienvenidos</h2>
-        <div class="text-block">
-            <p>Esta es el aula virtual del <strong>VI Ciclo</strong> de la Facultad de Ingeniería Estadística e Informática (FINESI) de la Universidad Nacional del Altiplano – Puno.</p>
-            <p>En este espacio encontrarás toda la información relacionada con los cursos del semestre 2026-I: sílabos, horarios, listas de estudiantes y recursos de apoyo.</p>
-            <p>El curso <strong>Gestión de Proyectos TICs (EST315)</strong> es el eje articulador de este ciclo, donde aplicaremos metodologías ágiles y tradicionales para la gestión de portafolios tecnológicos.</p>
-        </div>
-
-        <h2><i class="fas fa-bullseye"></i> Logro del curso (EST315)</h2>
-        <div class="text-block">
-            <p>Al finalizar el curso, el estudiante <strong>gestiona portafolios y proyectos de Tecnologías de Información y Comunicación</strong> aplicando metodologías tradicionales, ágiles e híbridas para planificar, ejecutar, monitorear y controlar iniciativas relacionadas con desarrollo de software, redes y telecomunicaciones, estadística, ciencia de datos, inteligencia artificial e investigación aplicada, utilizando herramientas digitales que garanticen trazabilidad, calidad y cumplimiento de objetivos durante todo el ciclo de vida del proyecto.</p>
-        </div>
-
-        <h2><i class="fas fa-user-tie"></i> Docente responsable</h2>
-        <div class="text-block">
-            <p><strong>M. Sc. Romel Percy Melgarejo Bolívar</strong> – Contratado B2<br/>
-            <i class="fas fa-envelope" style="color:#3b82f6;"></i> rmelgarejo@unap.edu.pe</p>
-        </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- TAB 2: CURSOS                                                  -->
-    <!-- ============================================================ -->
-    <div id="tab-cursos" class="tab-content">
-        <h2><i class="fas fa-book-open"></i> Cursos del VI Ciclo</h2>
-        <p style="color:#64748b; margin-bottom:1.2rem;">Cada curso incluye su sílabo (PDF), horario y la lista de estudiantes con código y DNI.</p>
-
-        <div class="card-grid" id="cursos-container">
-            <!-- Los cursos se generarán con JavaScript -->
-        </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- TAB 3: RECURSOS                                                -->
-    <!-- ============================================================ -->
-    <div id="tab-recursos" class="tab-content">
-        <h2><i class="fas fa-paperclip"></i> Recursos y materiales</h2>
-        <div class="text-block">
-            <ul>
-                <li><i class="fas fa-github" style="color:#3b82f6;"></i> <a href="https://github.com/jhoel219/Banegascours" target="_blank" style="color:#3b82f6; text-decoration:none; font-weight:600;">Repositorio del aula virtual</a></li>
-                <li><i class="fas fa-chart-bar" style="color:#3b82f6;"></i> <a href="https://banegasestadisticacomputacional.shinyapps.io/shinybanegas/" target="_blank" style="color:#3b82f6; text-decoration:none; font-weight:600;">App Shiny - Prueba de Levene</a></li>
-                <li><i class="fas fa-file-pdf" style="color:#3b82f6;"></i> <a href="#" style="color:#3b82f6; text-decoration:none; font-weight:600;">Guías de práctica (próximamente)</a></li>
-                <li><i class="fas fa-video" style="color:#3b82f6;"></i> <a href="#" style="color:#3b82f6; text-decoration:none; font-weight:600;">Grabaciones de clases (próximamente)</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- TAB 4: EVALUACIÓN                                              -->
-    <!-- ============================================================ -->
-    <div id="tab-evaluacion" class="tab-content">
-        <h2><i class="fas fa-check-circle"></i> Evaluación del aprendizaje</h2>
-        <div class="text-block">
-            <p>La evaluación se realiza por unidades didácticas, con las siguientes ponderaciones:</p>
-
-            <h3>Unidad I (50%)</h3>
-            <ul>
-                <li>Evidencia 1: Trabajos prácticos – 50%</li>
-                <li>Evidencia 2: Examen escrito – 50%</li>
-            </ul>
-
-            <h3>Unidad II (50%)</h3>
-            <ul>
-                <li>Evidencia 3: Trabajos prácticos – 50%</li>
-                <li>Evidencia 4: Examen escrito – 50%</li>
-            </ul>
-
-            <p><strong>Promedio final = 50% (Promedio Unidad I) + 50% (Promedio Unidad II)</strong></p>
-            <p>Las fechas de entrega y presentación se coordinarán en clase y se publicarán oportunamente.</p>
-        </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- FOOTER                                                         -->
-    <!-- ============================================================ -->
-    <footer>
-        <p>© 2026 FINESI - Universidad Nacional del Altiplano · Hecho con <i class="fas fa-heart"></i> desde GitHub Pages</p>
-    </footer>
-</div>
-
-<!-- ============================================================ -->
-<!-- SCRIPT PARA PESTAÑAS Y GENERACIÓN DE CURSOS                   -->
-<!-- ============================================================ -->
-<script>
-    // ---- LISTA DE ESTUDIANTES (con código y DNI simulados) ----
-    const estudiantes = [
-        { nombre: "APAZA QUISPE ANTONIO VICENTE", codigo: "230101", dni: "71234567" },
-        { nombre: "ARHUATA MAMANI PATRICIA", codigo: "230102", dni: "73456789" },
-        { nombre: "ARIAS RAMIREZ ALEX", codigo: "230103", dni: "75678901" },
-        { nombre: "CALCINA AQUINO DINA SUSAN", codigo: "230104", dni: "77890123" },
-        { nombre: "COSI COSI ABRAN FRANCO", codigo: "230105", dni: "79012345" },
-        { nombre: "CASTILLO QUILCA ALEX ANGEL", codigo: "230106", dni: "71234568" },
-        { nombre: "CHAVEZ LIMA JHOAN JEREMY", codigo: "230107", dni: "73456780" },
-        { nombre: "CHURA CHAMBILLA RAUL CRISTIAN", codigo: "230108", dni: "75678902" },
-        { nombre: "CHURA PAYE GUIAN MARCO", codigo: "230109", dni: "77890124" },
-        { nombre: "CONDORI BANEGAS JHOSEEP JHOEL", codigo: "230110", dni: "79012346" },
-        { nombre: "CURMILLUNI ANCCO CRISTIAN JOEL", codigo: "230111", dni: "71234569" },
-        { nombre: "CUTIPA CARCASI BRYAN", codigo: "230112", dni: "73456781" },
-        { nombre: "CUTIPA JULI FRANKLIN ANDRES", codigo: "230113", dni: "75678903" },
-        { nombre: "ESCOBEDO ARAPA KENYI BLANCA", codigo: "230114", dni: "77890125" },
-        { nombre: "FLORES NINA ANTONY JHONATAN", codigo: "230115", dni: "79012347" },
-        { nombre: "FONSECA LIZARRAGA CINTHIA YANETH", codigo: "230116", dni: "71234570" },
-        { nombre: "JINEZ INCACUTIPA RONALDHINO", codigo: "230117", dni: "73456782" },
-        { nombre: "MACHACA ATENCIO DENIS ELOY", codigo: "230118", dni: "75678904" },
-        { nombre: "MAMANI PARI BECKHAM MARK ANTONY", codigo: "230119", dni: "77890126" },
-        { nombre: "MAMANI PARI JONATHAN YIMMY", codigo: "230120", dni: "79012348" },
-        { nombre: "MAMANI QUISPE RONALDO", codigo: "230121", dni: "71234571" },
-        { nombre: "MEZA MAMANI CHRISTIAN JOSE", codigo: "230122", dni: "73456783" },
-        { nombre: "PAREDES ENCINAS LUIS BELTRAN", codigo: "230123", dni: "75678905" },
-        { nombre: "QUISPE RAMOS DANIEL JHOSIMAR", codigo: "230124", dni: "77890127" },
-        { nombre: "ROQUE MAMANI VIDMAN RUIS", codigo: "230125", dni: "79012349" },
-        { nombre: "SALCCA LAGAR KEYSI", codigo: "230126", dni: "71234572" },
-        { nombre: "SUAREZ CCAMA LENNIN ALFONSO", codigo: "230127", dni: "73456784" },
-        { nombre: "SULLCAHUAMAN CHAMBI NICOLE GERALDINE", codigo: "230128", dni: "75678906" },
-        { nombre: "SUNI MORALES SMIT ALEXANDER", codigo: "230129", dni: "77890128" },
-        { nombre: "TIQUE ASCENCIO ALEXIS ANTONY", codigo: "230130", dni: "79012350" },
-        { nombre: "TITO CHURA RENZO ROBIÑO", codigo: "230131", dni: "71234573" },
-        { nombre: "VELASQUEZ QUISPE WALDIR YEISON", codigo: "230132", dni: "73456785" },
-        { nombre: "VIDAL FUENTES ANTHONY JORDY", codigo: "230133", dni: "75678907" },
-        { nombre: "VILCA CHAMBILLA BRIGGITTE JHOSSELYN", codigo: "230134", dni: "77890129" },
-        { nombre: "YUJRA CONDORI ELMER IVAN", codigo: "230135", dni: "79012351" },
-        { nombre: "QUISPE VARGAS RENATO", codigo: "230136", dni: "71234574" },
-        { nombre: "AGUILAR MAMANI ANHELY", codigo: "230137", dni: "73456786" }
-    ];
-
-    // ---- DATOS DE LOS CURSOS (CON HORARIO CORREGIDO SEGÚN LA ÚLTIMA IMAGEN) ----
-    const cursos = [
-        {
-            codigo: "EST209",
-            nombre: "Regresión Lineal y No Lineal",
-            docente: "Vargas Valverde Confesor Milan",
-            silabo: "SILABOS_REGRESION LINEAL Y NO LINEAL - VARGAS VALVERDE CONFESOR MILAN.pdf",
-            // CAMBIO 2: Horario corregido
-            horario: "Martes 4:00 pm - 7:00 pm",
-            icono: "fa-chart-line"
-        },
-        {
-            codigo: "EST210",
-            nombre: "Modelos Lineales",
-            docente: "Morillos Valderrama Santos Octavio",
-            silabo: "SILABOS_MODELOS LINEALES - MORILLOS VALDERRAMA SANTOS OCTAVIO.pdf",
-            horario: "Lunes 1:00 pm - 3:00 pm · Martes 1:00 pm - 3:00 pm · Jueves 1:00 pm - 3:00 pm",
-            icono: "fa-cubes"
-        },
-        {
-            codigo: "EST314",
-            nombre: "Aprendizaje No Supervisado",
-            docente: "Aleman Gonzales Leonid",
-            silabo: "SILABOS_Aprendizaje_no_Supervizado - ALEMAN GONZALES LEONID.pdf",
-            horario: "Lunes 3:00 pm - 5:00 pm",
-            icono: "fa-robot"
-        },
-        {
-            codigo: "EST315",
-            nombre: "Gestión de Proyectos TICs",
-            docente: "Melgarejo Bolívar Romel Percy",
-            silabo: "SILABOS_GESTION DE PROYECTOS TICS - MELGAREJO BOLIVAR ROMEL PERCY.pdf",
-            horario: "Miércoles 3:00 pm - 5:00 pm · Jueves 4:00 pm - 7:00 pm",
-            icono: "fa-project-diagram"
-        },
-        {
-            codigo: "EST316",
-            nombre: "Arquitectura de Redes y Protocolos",
-            docente: "Apaza Tarqui Alejandro",
-            silabo: "SILABOS_Arquitectura de Redes y Protocolos - APAZA TARQUI ALEJANDRO.pdf",
-            horario: "Martes 3:00 pm - 5:00 pm · Miércoles 5:00 pm - 7:00 pm",
-            icono: "fa-network-wired"
-        },
-        {
-            codigo: "EST317",
-            nombre: "Series de Tiempo",
-            docente: "Lluen Vallejos Cesar Augusto",
-            silabo: "SILABOS_SERIES DE TIEMPO - LLUEN VALLEJOS CESAR AUGUSTO.pdf",
-            horario: "Lunes 5:00 pm - 7:00 pm · Miércoles 1:00 pm - 4:00 pm",
-            icono: "fa-chart-simple"
-        }
-    ];
-
-    // ---- GENERAR TARJETAS DE CURSOS ----
-    const container = document.getElementById('cursos-container');
-
-    cursos.forEach(curso => {
-        // Crear card
-        const card = document.createElement('div');
-        card.className = 'card';
-
-        // Título y docente
-        let html = `
-            <div class="curso-titulo">
-                <i class="fas ${curso.icono}"></i> ${curso.codigo} - ${curso.nombre}
+        <!-- ========== SECCIÓN INICIO (Panel de Control) ========== -->
+        <div id="section-inicio">
+            <div class="grid-cards">
+                <!-- Tarjeta: Cursos Activos -->
+                <div class="card-curso" style="border-left: 6px solid #3b82f6; padding:25px;">
+                    <h3>📚 Cursos Activos</h3>
+                    <p style="color:#64748b; margin:5px 0 15px;">Tienes <strong id="totalCursos">6</strong> cursos matriculados</p>
+                    <a class="btn-ingresar" style="background:#64748b;" onclick="showSection('cursos')">Ver todos →</a>
+                </div>
+                <!-- Tarjeta: Sílabos -->
+                <div class="card-curso" style="border-left: 6px solid #10b981; padding:25px;">
+                    <h3>📄 Sílabos</h3>
+                    <p style="color:#64748b; margin:5px 0 15px;">Descarga los programas oficiales</p>
+                    <a class="btn-ingresar" style="background:#10b981;" onclick="showSection('silabos')">Ver sílabos →</a>
+                </div>
+                <!-- Tarjeta: Horario -->
+                <div class="card-curso" style="border-left: 6px solid #8b5cf6; padding:25px;">
+                    <h3>📅 Horario</h3>
+                    <p style="color:#64748b; margin:5px 0 15px;">Consulta tu horario de clases</p>
+                    <a class="btn-ingresar" style="background:#8b5cf6;" onclick="showSection('horario')">Ver horario →</a>
+                </div>
+                <!-- Tarjeta: Compañeros -->
+                <div class="card-curso" style="border-left: 6px solid #f59e0b; padding:25px;">
+                    <h3>👥 Compañeros</h3>
+                    <p style="color:#64748b; margin:5px 0 15px;">Conecta con tu clase</p>
+                    <a class="btn-ingresar" style="background:#f59e0b;" onclick="showSection('companeros')">Lista →</a>
+                </div>
+                <!-- Tarjeta: Asistencia (ejemplo) -->
+                <div class="card-curso" style="border-left: 6px solid #ef4444; padding:25px;">
+                    <h3>✅ Asistencia</h3>
+                    <p style="color:#64748b; margin:5px 0 15px;">Registro de asistencia a clases</p>
+                    <a href="#" class="btn-ingresar" style="background:#ef4444;">Ver asistencia →</a>
+                </div>
+                <!-- Tarjeta: Calendario Académico -->
+                <div class="card-curso" style="border-left: 6px solid #06b6d4; padding:25px;">
+                    <h3>📆 Calendario Académico</h3>
+                    <p style="color:#64748b; margin:5px 0 15px;">Fechas importantes del semestre</p>
+                    <a href="#" class="btn-ingresar" style="background:#06b6d4;">Ver calendario →</a>
+                </div>
             </div>
-            <div class="curso-docente"><i class="fas fa-user"></i> ${curso.docente}</div>
-            <div class="info-row"><i class="fas fa-clock"></i> ${curso.horario}</div>
-            <a class="silabo-link" href="${curso.silabo}" target="_blank"><i class="fas fa-file-pdf"></i> Ver sílabo (PDF)</a>
-            <br>
-            <button class="estudiantes-toggle" onclick="toggleEstudiantes(this)">
-                <i class="fas fa-users"></i> Ver estudiantes (${estudiantes.length})
-            </button>
-            <div class="estudiantes-lista">
-                <table>
+
+            <!-- Sección extra: tareas pendientes y contador -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;">
+                <div style="background: rgba(255,255,255,0.85); backdrop-filter: blur(2px); border-radius:16px; padding:20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <h3 style="color:#0f172a; margin-bottom:10px;">📋 Tareas Pendientes</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 8px 0; border-bottom: 1px solid #e2e8f0;">📌 Entregar avance del proyecto - 20/07</li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid #e2e8f0;">📌 Leer capítulo 5 - PMBOK</li>
+                        <li style="padding: 8px 0;">📌 Preparar presentación final - 28/07</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(255,255,255,0.85); backdrop-filter: blur(2px); border-radius:16px; padding:20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <h3 style="color:#0f172a; margin-bottom:10px;">⏳ Próximo Examen Final</h3>
+                    <p style="font-size: 36px; font-weight: 700; color: #3b82f6; text-align: center;" id="contador-examen">--</p>
+                    <p style="text-align: center; color: #64748b;">días restantes</p>
+                </div>
+            </div>
+
+            <!-- Mensaje de bienvenida -->
+            <div style="margin-top: 30px;">
+                <p style="color:#0369a1;">📌 <strong>Bienvenido a tu Intranet Personal.</strong> Aquí tienes acceso a todos tus cursos, sílabos, horario, docentes y compañeros.</p>
+            </div>
+        </div>
+
+        <!-- ========== SECCIÓN CURSOS (con botón a sílabo) ========== -->
+        <div id="section-cursos" style="display:none;">
+            <h2 style="color:#0f172a; margin-bottom:20px;">📚 Mis Cursos</h2>
+            <div id="cursosContainer" class="grid-cards">
+                <!-- Renderizado por JS -->
+            </div>
+        </div>
+
+        <!-- ========== SECCIÓN SÍLABOS (lista de descarga) ========== -->
+        <div id="section-silabos" style="display:none;">
+            <h2 style="color:#0f172a; margin-bottom:20px;">📄 Sílabos Oficiales</h2>
+            <div class="silabo-contenido">
+                <heading>📚 Descarga los sílabos de todos tus cursos</heading>
+                <div class="silabo-item">
+                    <div class="silabo-info">
+                        <span class="codigo">EST315</span>
+                        <span class="curso">Gestión de Proyectos TICs</span>
+                        <span class="docente">M. Sc. Romel Percy Melgarejo Bolívar</span>
+                    </div>
+                    <a href="https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_GESTION%20DE%20PROYECTOS%20TICS%20-%20MELGAREJO%20BOLIVAR%20ROMEL%20PERCY.pdf" target="_blank" class="btn-descargar">📄 Descargar</a>
+                </div>
+                <div class="silabo-item">
+                    <div class="silabo-info">
+                        <span class="codigo">EST314</span>
+                        <span class="curso">Aprendizaje No Supervisado</span>
+                        <span class="docente">Aleman Gonzales Leonid</span>
+                    </div>
+                    <a href="https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Aprendizaje_no_Supervizado%20-%20ALEMAN%20GONZALES%20LEONID.pdf" target="_blank" class="btn-descargar">📄 Descargar</a>
+                </div>
+                <div class="silabo-item">
+                    <div class="silabo-info">
+                        <span class="codigo">EST316</span>
+                        <span class="curso">Arquitectura de Redes y Protocolos</span>
+                        <span class="docente">Apaza Tarqui Alejandro</span>
+                    </div>
+                    <a href="https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Arquitectura%20de%20Redes%20y%20Protocolos%20-%20APAZA%20TARQUI%20ALEJANDRO.pdf" target="_blank" class="btn-descargar">📄 Descargar</a>
+                </div>
+                <div class="silabo-item">
+                    <div class="silabo-info">
+                        <span class="codigo">EST210</span>
+                        <span class="curso">Modelos Lineales</span>
+                        <span class="docente">Morillos Valderrama Santos Octavio</span>
+                    </div>
+                    <a href="https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_MODELOS%20LINEALES%20-%20MORILLOS%20VALDERRAMA%20SANTOS%20OCTAVIO.pdf" target="_blank" class="btn-descargar">📄 Descargar</a>
+                </div>
+                <div class="silabo-item">
+                    <div class="silabo-info">
+                        <span class="codigo">EST200</span>
+                        <span class="curso">Regresión Lineal y No Lineal</span>
+                        <span class="docente">Vargas Valverde Confesor Milan</span>
+                    </div>
+                    <a href="https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_REGRESION%20LINEAL%20Y%20NO%20LINEAL%20-%20VARGAS%20VALVERDE%20CONFESOR%20MILAN.pdf" target="_blank" class="btn-descargar">📄 Descargar</a>
+                </div>
+                <div class="silabo-item">
+                    <div class="silabo-info">
+                        <span class="codigo">EST317</span>
+                        <span class="curso">Series de Tiempo</span>
+                        <span class="docente">Lluen Vallejos Cesar Augusto</span>
+                    </div>
+                    <a href="https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_SERIES%20DE%20TIEMPO%20-%20LLUEN%20VALLEJOS%20CESAR%20AUGUSTO.pdf" target="_blank" class="btn-descargar">📄 Descargar</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== SECCIÓN HORARIO (CORREGIDA SEGÚN TU IMAGEN) ========== -->
+        <div id="section-horario" style="display:none;">
+            <h2 style="color:#0f172a; margin-bottom:20px;">📅 Horario de Clases</h2>
+            <div class="section-block" style="overflow-x:auto;">
+                <table class="horario-tabla">
                     <thead>
-                        <tr><th>#</th><th>Apellidos y Nombres</th><th>Código</th><th>DNI</th></tr>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Lunes</th>
+                            <th>Martes</th>
+                            <th>Miércoles</th>
+                            <th>Jueves</th>
+                            <th>Viernes</th>
+                        </tr>
                     </thead>
                     <tbody>
-        `;
-
-        estudiantes.forEach((est, index) => {
-            html += `
-                <tr>
-                    <td>${index+1}</td>
-                    <td>${est.nombre}</td>
-                    <td>${est.codigo}</td>
-                    <td>${est.dni}</td>
-                </tr>
-            `;
-        });
-
-        html += `
+                        <tr>
+                            <td class="hora">1:00 PM</td>
+                            <td rowspan="2" style="background:#dbeafe;">
+                                <span class="curso-nombre">Modelos Lineales</span><br>
+                                <span class="curso-codigo">EST210</span>
+                            </td>
+                            <td rowspan="2" style="background:#dbeafe;">
+                                <span class="curso-nombre">Modelos Lineales</span><br>
+                                <span class="curso-codigo">EST210</span>
+                            </td>
+                            <td rowspan="3" style="background:#fce7f3;">
+                                <span class="curso-nombre">Series de Tiempo</span><br>
+                                <span class="curso-codigo">EST317</span>
+                            </td>
+                            <td rowspan="2" style="background:#dbeafe;">
+                                <span class="curso-nombre">Modelos Lineales</span><br>
+                                <span class="curso-codigo">EST210</span>
+                            </td>
+                            <td rowspan="7" style="background:#f1f5f9; color:#94a3b8;">Sin clases</td>
+                        </tr>
+                        <tr><td class="hora">2:00 PM</td></tr>
+                        <tr>
+                            <td class="hora">3:00 PM</td>
+                            <td rowspan="2" style="background:#d1fae5;">
+                                <span class="curso-nombre">Aprendizaje No Supervisado</span><br>
+                                <span class="curso-codigo">EST314</span>
+                            </td>
+                            <td rowspan="2" style="background:#fef3c7;">
+                                <span class="curso-nombre">Arquitectura de Redes</span><br>
+                                <span class="curso-codigo">EST316</span>
+                            </td>
+                            <td style="background:#fce7f3;">
+                                <span class="curso-nombre">Series de Tiempo</span><br>
+                                <span class="curso-codigo">EST317</span>
+                            </td>
+                            <td style="background:#f1f5f9;"></td>
+                        </tr>
+                        <tr>
+                            <td class="hora">4:00 PM</td>
+                            <td style="background:#fef3c7;">
+                                <span class="curso-nombre">Arquitectura de Redes</span><br>
+                                <span class="curso-codigo">EST316</span>
+                            </td>
+                            <td style="background:#fef3c7;">
+                                <span class="curso-nombre">Gestión de Proyectos</span><br>
+                                <span class="curso-codigo">EST315</span>
+                            </td>
+                            <td rowspan="3" style="background:#fef3c7;">
+                                <span class="curso-nombre">Gestión de Proyectos</span><br>
+                                <span class="curso-codigo">EST315</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="hora">5:00 PM</td>
+                            <td rowspan="2" style="background:#fce7f3;">
+                                <span class="curso-nombre">Series de Tiempo</span><br>
+                                <span class="curso-codigo">EST317</span>
+                            </td>
+                            <td rowspan="2" style="background:#fef3c7;">
+                                <span class="curso-nombre">Regresión Lineal</span><br>
+                                <span class="curso-codigo">EST200</span>
+                            </td>
+                            <td style="background:#fef3c7;">
+                                <span class="curso-nombre">Gestión de Proyectos</span><br>
+                                <span class="curso-codigo">EST315</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="hora">6:00 PM</td>
+                            <td rowspan="1" style="background:#fef3c7;">
+                                <span class="curso-nombre">Arquitectura de Redes</span><br>
+                                <span class="curso-codigo">EST316</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="hora">7:00 PM</td>
+                            <td style="background:#f1f5f9;"></td>
+                            <td style="background:#fef3c7;">
+                                <span class="curso-nombre">Regresión Lineal</span><br>
+                                <span class="curso-codigo">EST200</span>
+                            </td>
+                            <td style="background:#f1f5f9;"></td>
+                            <td style="background:#fef3c7;">
+                                <span class="curso-nombre">Gestión de Proyectos</span><br>
+                                <span class="curso-codigo">EST315</span>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
+                <p style="margin-top: 15px; color: #64748b; font-size: 14px;">
+                    <span style="display:inline-block; background:#dbeafe; padding:2px 10px; border-radius:12px;">Modelos Lineales (EST210)</span>
+                    <span style="display:inline-block; background:#d1fae5; padding:2px 10px; border-radius:12px;">Aprendizaje No Supervisado (EST314)</span>
+                    <span style="display:inline-block; background:#fce7f3; padding:2px 10px; border-radius:12px;">Series de Tiempo (EST317)</span>
+                    <span style="display:inline-block; background:#fef3c7; padding:2px 10px; border-radius:12px;">Arquitectura de Redes (EST316) / Regresión Lineal (EST200) / Gestión de Proyectos (EST315)</span>
+                </p>
             </div>
-        `;
+        </div>
 
-        card.innerHTML = html;
-        container.appendChild(card);
-    });
+        <!-- ========== SECCIÓN DOCENTE ========== -->
+        <div id="section-docente" style="display:none;">
+            <h2 style="color:#0f172a; margin-bottom:20px;">👨‍🏫 Plana Docente</h2>
+            <div class="section-block">
+                <div class="docente-perfil">
+                    <div class="avatar">👨‍🏫</div>
+                    <div><h3>M. Sc. Romel Percy Melgarejo Bolívar</h3><p style="color:#64748b;">Docente Principal - Gestión de Proyectos TICs</p><p style="color:#94a3b8; font-size:13px;">📧 permelro@unap.edu.pe</p></div>
+                </div>
+                <hr style="margin:20px 0;">
+                <div class="docente-perfil">
+                    <div class="avatar" style="background:#10b981;">👩‍🏫</div>
+                    <div><h3>Aleman Gonzales Leonid</h3><p style="color:#64748b;">Docente - Aprendizaje No Supervisado</p></div>
+                </div>
+                <div class="docente-perfil">
+                    <div class="avatar" style="background:#8b5cf6;">👨‍🏫</div>
+                    <div><h3>Apaza Tarqui Alejandro</h3><p style="color:#64748b;">Docente - Arquitectura de Redes y Protocolos</p></div>
+                </div>
+                <div class="docente-perfil">
+                    <div class="avatar" style="background:#f59e0b;">👨‍🏫</div>
+                    <div><h3>Morillos Valderrama Santos Octavio</h3><p style="color:#64748b;">Docente - Modelos Lineales</p></div>
+                </div>
+                <div class="docente-perfil">
+                    <div class="avatar" style="background:#ef4444;">👨‍🏫</div>
+                    <div><h3>Vargas Valverde Confesor Milan</h3><p style="color:#64748b;">Docente - Regresión Lineal y No Lineal</p></div>
+                </div>
+                <div class="docente-perfil">
+                    <div class="avatar" style="background:#06b6d4;">👨‍🏫</div>
+                    <div><h3>Lluen Vallejos Cesar Augusto</h3><p style="color:#64748b;">Docente - Series de Tiempo</p></div>
+                </div>
+            </div>
+        </div>
 
-    // ---- FUNCIÓN PARA MOSTRAR/OCULTAR LISTA DE ESTUDIANTES ----
-    function toggleEstudiantes(btn) {
-        const lista = btn.nextElementSibling;
-        const estaAbierta = lista.classList.contains('abierta');
-        if (estaAbierta) {
-            lista.classList.remove('abierta');
-            btn.innerHTML = '<i class="fas fa-users"></i> Ver estudiantes (' + estudiantes.length + ')';
-        } else {
-            lista.classList.add('abierta');
-            btn.innerHTML = '<i class="fas fa-users"></i> Ocultar estudiantes';
+        <!-- ========== SECCIÓN COMPAÑEROS ========== -->
+        <div id="section-companeros" style="display:none;">
+            <h2 style="color:#0f172a; margin-bottom:20px;">👥 Lista de Compañeros</h2>
+            <div class="section-block">
+                <table>
+                    <thead><tr><th>#</th><th>Nombre Completo</th><th>Correo</th></tr></thead>
+                    <tbody id="tabla-companeros"></tbody>
+                </table>
+                <p style="margin-top:15px; color:#94a3b8; font-size:13px;">💡 Los correos se generan automáticamente con un DNI ficticio.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // =====================================================
+        // 1. DATOS DE CURSOS (con enlace al sílabo)
+        // =====================================================
+        const cursos = [
+            {
+                codigo: 'EST315',
+                nombre: 'Gestión de Proyectos TICs',
+                grupo: 'UNICO',
+                obligatorio: true,
+                enlace: '#',
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_GESTION%20DE%20PROYECTOS%20TICS%20-%20MELGAREJO%20BOLIVAR%20ROMEL%20PERCY.pdf'
+            },
+            {
+                codigo: 'EST314',
+                nombre: 'Aprendizaje No Supervisado',
+                grupo: 'UNICO',
+                obligatorio: true,
+                enlace: '#',
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Aprendizaje_no_Supervizado%20-%20ALEMAN%20GONZALES%20LEONID.pdf'
+            },
+            {
+                codigo: 'EST316',
+                nombre: 'Arquitectura de Redes y Protocolos',
+                grupo: 'UNICO',
+                obligatorio: true,
+                enlace: '#',
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Arquitectura%20de%20Redes%20y%20Protocolos%20-%20APAZA%20TARQUI%20ALEJANDRO.pdf'
+            },
+            {
+                codigo: 'EST210',
+                nombre: 'Modelos Lineales',
+                grupo: 'UNICO',
+                obligatorio: true,
+                enlace: '#',
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_MODELOS%20LINEALES%20-%20MORILLOS%20VALDERRAMA%20SANTOS%20OCTAVIO.pdf'
+            },
+            {
+                codigo: 'EST200',
+                nombre: 'Regresión Lineal y No Lineal',
+                grupo: 'UNICO',
+                obligatorio: true,
+                enlace: '#',
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_REGRESION%20LINEAL%20Y%20NO%20LINEAL%20-%20VARGAS%20VALVERDE%20CONFESOR%20MILAN.pdf'
+            },
+            {
+                codigo: 'EST317',
+                nombre: 'Series de Tiempo',
+                grupo: 'UNICO',
+                obligatorio: true,
+                enlace: '#',
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_SERIES%20DE%20TIEMPO%20-%20LLUEN%20VALLEJOS%20CESAR%20AUGUSTO.pdf'
+            }
+        ];
+
+        // =====================================================
+        // 2. DATOS DE COMPAÑEROS (con DNI aleatorio fijo)
+        // =====================================================
+        const nombresCompaneros = [
+            'APAZA QUISPE ANTONIO VICENTE',
+            'ARHUATA MAMANI PATRICIA',
+            'ARIAS RAMIREZ ALEX',
+            'CALCINA AQUINO DINA SUSAN',
+            'COSI COSI ABRAN FRANCO',
+            'CASTILLO QUILCA ALEX ANGEL',
+            'CHAVEZ LIMA JHOAN JEREMY',
+            'CHURA CHAMBILLA RAUL CRISTIAN',
+            'CHURA PAYE GUIAN MARCO',
+            'CONDORI BANEGAS JHOSEEP JHOEL',
+            'CURMILLUNI ANCCO CRISTIAN JOEL',
+            'CUTIPA CARCASI BRYAN',
+            'CUTIPA JULI FRANKLIN ANDRES',
+            'ESCOBEDO ARAPA KENYI BLANCA',
+            'FLORES NINA ANTONY JHONATAN',
+            'FONSECA LIZARRAGA CINTHIA YANETH',
+            'JINEZ INCACUTIPA RONALDHINO',
+            'MACHACA ATENCIO DENIS ELOY',
+            'MAMANI PARI BECKHAM MARK ANTONY',
+            'MAMANI PARI JONATHAN YIMMY',
+            'MAMANI QUISPE RONALDO',
+            'MEZA MAMANI CHRISTIAN JOSE',
+            'PAREDES ENCINAS LUIS BELTRAN',
+            'QUISPE RAMOS DANIEL JHOSIMAR',
+            'ROQUE MAMANI VIDMAN RUIS',
+            'SALCCA LAGAR KEYSI',
+            'SUAREZ CCAMA LENNIN ALFONSO',
+            'SULLCAHUAMAN CHAMBI NICOLE GERALDINE',
+            'SUNI MORALES SMIT ALEXANDER',
+            'TIQUE ASCENCIO ALEXIS ANTONY',
+            'TITO CHURA RENZO ROBIÑO',
+            'VELASQUEZ QUISPE WALDIR YEISON',
+            'VIDAL FUENTES ANTHONY JORDY',
+            'VILCA CHAMBILLA BRIGGITTE JHOSSELYN',
+            'YUJRA CONDORI ELMER IVAN',
+            'QUISPE VARGAS RENATO',
+            'AGUILAR MAMANI ANHELY'
+        ];
+
+        function generarCorreo(index) {
+            const base = 70000000 + (index * 12345) % 100000000;
+            const dni = String(base).padStart(8, '0');
+            return dni + '@est.unap.edu.pe';
         }
-    }
 
-    // ---- CAMBIO DE PESTAÑAS ----
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Quitar active de todos los botones y contenidos
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        const companeros = nombresCompaneros.map((nombre, i) => ({
+            nombre: nombre,
+            correo: generarCorreo(i)
+        }));
 
-            // Activar el botón clickeado
-            this.classList.add('active');
+        // =====================================================
+        // 3. FUNCIONES DE RENDERIZADO
+        // =====================================================
+        function renderCursos() {
+            const container = document.getElementById('cursosContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            cursos.forEach(curso => {
+                const card = document.createElement('div');
+                card.className = 'card-curso';
+                card.innerHTML = `
+                    <span class="codigo">${curso.codigo}</span>
+                    <h3>${curso.nombre}</h3>
+                    <span class="grupo">Grupo: ${curso.grupo}</span>
+                    <span class="etiqueta-obligatorio">OBLIGATORIO</span>
+                    <div class="facultad">INGENIERIA ESTADISTICA E INFORMATICA<br>FINESI</div>
+                    <a href="${curso.enlace}" class="btn-ingresar">Ingresar →</a>
+                    <a href="${curso.silabo}" target="_blank" class="btn-silabo">📄 Ver sílabo</a>
+                `;
+                container.appendChild(card);
+            });
+            const totalSpan = document.getElementById('totalCursos');
+            if (totalSpan) totalSpan.textContent = cursos.length;
+        }
 
-            // Activar el contenido correspondiente
-            const tabId = this.getAttribute('data-tab');
-            document.getElementById('tab-' + tabId).classList.add('active');
+        function renderCompaneros() {
+            const tbody = document.getElementById('tabla-companeros');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            companeros.forEach((comp, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${index + 1}</td><td><strong>${comp.nombre}</strong></td><td>${comp.correo}</td>`;
+                tbody.appendChild(row);
+            });
+        }
+
+        // =====================================================
+        // 4. CONTADOR DE DÍAS PARA EXAMEN FINAL
+        // =====================================================
+        function actualizarContador() {
+            const targetDate = new Date('2026-07-28');
+            const now = new Date();
+            const diff = Math.ceil((targetDate - now) / (1000 * 60 * 60 * 24));
+            const contador = document.getElementById('contador-examen');
+            if (contador) {
+                contador.textContent = diff > 0 ? diff : '¡Hoy!';
+            }
+        }
+
+        // =====================================================
+        // 5. NAVEGACIÓN POR PESTAÑAS
+        // =====================================================
+        function showSection(sectionName) {
+            document.querySelectorAll('[id^="section-"]').forEach(el => el.style.display = 'none');
+            const target = document.getElementById('section-' + sectionName);
+            if (target) target.style.display = 'block';
+
+            document.querySelectorAll('.sidebar nav a').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.sidebar nav a').forEach(el => {
+                const txt = el.textContent.trim().toLowerCase();
+                if (txt.includes(sectionName) || (sectionName === 'inicio' && txt.includes('inicio'))) {
+                    el.classList.add('active');
+                }
+            });
+
+            const headerTitle = document.getElementById('headerTitle');
+            const mapTitles = {
+                'inicio': '📋 Panel de Control',
+                'cursos': '📚 Mis Cursos',
+                'silabos': '📄 Sílabos',
+                'horario': '📅 Horario',
+                'docente': '👨‍🏫 Plana Docente',
+                'companeros': '👥 Compañeros'
+            };
+            headerTitle.textContent = mapTitles[sectionName] || '📋 Panel de Control';
+        }
+
+        // =====================================================
+        // 6. INICIALIZAR
+        // =====================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCursos();
+            renderCompaneros();
+            actualizarContador();
+            showSection('inicio');
         });
-    });
-</script>
+    </script>
 
 </body>
 </html>
