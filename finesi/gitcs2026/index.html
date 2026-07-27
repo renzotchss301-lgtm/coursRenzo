@@ -22,37 +22,15 @@
             color: #1e293b;
             line-height: 1.7;
             padding: 1.5rem 1rem;
-            /* Marca de agua (imagen de la facultad) */
-            position: relative;
-            min-height: 100vh;
-        }
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('https://raw.githubusercontent.com/renzotchss301-lgtm/coursRenzo/main/finesi/images.jpg');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 70% auto;
-            opacity: 0.06;
-            filter: grayscale(100%);
-            pointer-events: none;
-            z-index: 0;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(2px);
+            background: #ffffff;
             border-radius: 28px;
             padding: 2.5rem;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
-            position: relative;
-            z-index: 1;
         }
 
         /* ===== CABECERA ===== */
@@ -73,7 +51,6 @@
             max-height: 80px;
             width: auto;
             border-radius: 12px;
-            border: 1px solid #e9edf2;
         }
 
         .header-info h1 {
@@ -193,7 +170,7 @@
 
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
             margin-top: 1rem;
         }
@@ -248,7 +225,7 @@
 
         .card .silabo-link {
             display: inline-block;
-            margin-top: 0.3rem;
+            margin-top: 0.5rem;
             color: #3b82f6;
             font-weight: 600;
             text-decoration: none;
@@ -270,7 +247,6 @@
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            margin-top: 0.5rem;
         }
         .card .estudiantes-toggle:hover {
             text-decoration: underline;
@@ -339,6 +315,7 @@
     <!-- ============================================================ -->
     <div class="header">
         <div class="header-logo">
+            <!-- CAMBIO 1: Ruta raw de la imagen -->
             <img src="https://raw.githubusercontent.com/renzotchss301-lgtm/coursRenzo/main/finesi/images.jpg" alt="Logo FINESI" />
         </div>
         <div class="header-info">
@@ -386,14 +363,14 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- TAB 2: CURSOS (con horario corregido y lista de estudiantes)   -->
+    <!-- TAB 2: CURSOS                                                  -->
     <!-- ============================================================ -->
     <div id="tab-cursos" class="tab-content">
         <h2><i class="fas fa-book-open"></i> Cursos del VI Ciclo</h2>
         <p style="color:#64748b; margin-bottom:1.2rem;">Cada curso incluye su sílabo (PDF), horario y la lista de estudiantes con código y DNI.</p>
 
         <div class="card-grid" id="cursos-container">
-            <!-- Los cursos se generan con JavaScript -->
+            <!-- Los cursos se generarán con JavaScript -->
         </div>
     </div>
 
@@ -404,7 +381,8 @@
         <h2><i class="fas fa-paperclip"></i> Recursos y materiales</h2>
         <div class="text-block">
             <ul>
-                <li><i class="fas fa-github" style="color:#3b82f6;"></i> <a href="https://github.com/renzotchss301-lgtm/coursRenzo" target="_blank" style="color:#3b82f6; text-decoration:none; font-weight:600;">Repositorio del aula virtual</a></li>
+                <li><i class="fas fa-github" style="color:#3b82f6;"></i> <a href="https://github.com/jhoel219/Banegascours" target="_blank" style="color:#3b82f6; text-decoration:none; font-weight:600;">Repositorio del aula virtual</a></li>
+                <li><i class="fas fa-chart-bar" style="color:#3b82f6;"></i> <a href="https://banegasestadisticacomputacional.shinyapps.io/shinybanegas/" target="_blank" style="color:#3b82f6; text-decoration:none; font-weight:600;">App Shiny - Prueba de Levene</a></li>
                 <li><i class="fas fa-file-pdf" style="color:#3b82f6;"></i> <a href="#" style="color:#3b82f6; text-decoration:none; font-weight:600;">Guías de práctica (próximamente)</a></li>
                 <li><i class="fas fa-video" style="color:#3b82f6;"></i> <a href="#" style="color:#3b82f6; text-decoration:none; font-weight:600;">Grabaciones de clases (próximamente)</a></li>
             </ul>
@@ -489,13 +467,14 @@
         { nombre: "AGUILAR MAMANI ANHELY", codigo: "230137", dni: "73456786" }
     ];
 
-    // ---- DATOS DE LOS CURSOS (con HORARIO CORREGIDO) ----
+    // ---- DATOS DE LOS CURSOS (CON HORARIO CORREGIDO SEGÚN LA ÚLTIMA IMAGEN) ----
     const cursos = [
         {
             codigo: "EST209",
             nombre: "Regresión Lineal y No Lineal",
             docente: "Vargas Valverde Confesor Milan",
-            silabo: "https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_REGRESION%20LINEAL%20Y%20NO%20LINEAL%20-%20VARGAS%20VALVERDE%20CONFESOR%20MILAN.pdf",
+            silabo: "SILABOS_REGRESION LINEAL Y NO LINEAL - VARGAS VALVERDE CONFESOR MILAN.pdf",
+            // CAMBIO 2: Horario corregido
             horario: "Martes 4:00 pm - 7:00 pm",
             icono: "fa-chart-line"
         },
@@ -503,7 +482,7 @@
             codigo: "EST210",
             nombre: "Modelos Lineales",
             docente: "Morillos Valderrama Santos Octavio",
-            silabo: "https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_MODELOS%20LINEALES%20-%20MORILLOS%20VALDERRAMA%20SANTOS%20OCTAVIO.pdf",
+            silabo: "SILABOS_MODELOS LINEALES - MORILLOS VALDERRAMA SANTOS OCTAVIO.pdf",
             horario: "Lunes 1:00 pm - 3:00 pm · Martes 1:00 pm - 3:00 pm · Jueves 1:00 pm - 3:00 pm",
             icono: "fa-cubes"
         },
@@ -511,7 +490,7 @@
             codigo: "EST314",
             nombre: "Aprendizaje No Supervisado",
             docente: "Aleman Gonzales Leonid",
-            silabo: "https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Aprendizaje_no_Supervizado%20-%20ALEMAN%20GONZALES%20LEONID.pdf",
+            silabo: "SILABOS_Aprendizaje_no_Supervizado - ALEMAN GONZALES LEONID.pdf",
             horario: "Lunes 3:00 pm - 5:00 pm",
             icono: "fa-robot"
         },
@@ -519,7 +498,7 @@
             codigo: "EST315",
             nombre: "Gestión de Proyectos TICs",
             docente: "Melgarejo Bolívar Romel Percy",
-            silabo: "https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_GESTION%20DE%20PROYECTOS%20TICS%20-%20MELGAREJO%20BOLIVAR%20ROMEL%20PERCY.pdf",
+            silabo: "SILABOS_GESTION DE PROYECTOS TICS - MELGAREJO BOLIVAR ROMEL PERCY.pdf",
             horario: "Miércoles 3:00 pm - 5:00 pm · Jueves 4:00 pm - 7:00 pm",
             icono: "fa-project-diagram"
         },
@@ -527,7 +506,7 @@
             codigo: "EST316",
             nombre: "Arquitectura de Redes y Protocolos",
             docente: "Apaza Tarqui Alejandro",
-            silabo: "https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Arquitectura%20de%20Redes%20y%20Protocolos%20-%20APAZA%20TARQUI%20ALEJANDRO.pdf",
+            silabo: "SILABOS_Arquitectura de Redes y Protocolos - APAZA TARQUI ALEJANDRO.pdf",
             horario: "Martes 3:00 pm - 5:00 pm · Miércoles 5:00 pm - 7:00 pm",
             icono: "fa-network-wired"
         },
@@ -535,7 +514,7 @@
             codigo: "EST317",
             nombre: "Series de Tiempo",
             docente: "Lluen Vallejos Cesar Augusto",
-            silabo: "https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_SERIES%20DE%20TIEMPO%20-%20LLUEN%20VALLEJOS%20CESAR%20AUGUSTO.pdf",
+            silabo: "SILABOS_SERIES DE TIEMPO - LLUEN VALLEJOS CESAR AUGUSTO.pdf",
             horario: "Lunes 5:00 pm - 7:00 pm · Miércoles 1:00 pm - 4:00 pm",
             icono: "fa-chart-simple"
         }
@@ -545,9 +524,11 @@
     const container = document.getElementById('cursos-container');
 
     cursos.forEach(curso => {
+        // Crear card
         const card = document.createElement('div');
         card.className = 'card';
 
+        // Título y docente
         let html = `
             <div class="curso-titulo">
                 <i class="fas ${curso.icono}"></i> ${curso.codigo} - ${curso.nombre}
@@ -604,10 +585,14 @@
     // ---- CAMBIO DE PESTAÑAS ----
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', function() {
+            // Quitar active de todos los botones y contenidos
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
+            // Activar el botón clickeado
             this.classList.add('active');
+
+            // Activar el contenido correspondiente
             const tabId = this.getAttribute('data-tab');
             document.getElementById('tab-' + tabId).classList.add('active');
         });
