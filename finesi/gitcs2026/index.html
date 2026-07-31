@@ -282,6 +282,47 @@
             .horario-tabla { font-size: 12px; }
             .horario-tabla th, .horario-tabla td { padding: 6px; }
         }
+
+        /* --- Modal de curso (agregado) --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-caja {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .modal-cerrar {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f1f5f9;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            color: #64748b;
+        }
+        .modal-cerrar:hover { background: #e2e8f0; }
+        .badge-asistencia {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -338,17 +379,17 @@
                     <p style="color:#64748b; margin:5px 0 15px;">Conecta con tu clase</p>
                     <a class="btn-ingresar" style="background:#f59e0b;" onclick="showSection('companeros')">Lista →</a>
                 </div>
-                <!-- Tarjeta: Asistencia (ejemplo) -->
+                <!-- Tarjeta: Asistencia -->
                 <div class="card-curso" style="border-left: 6px solid #ef4444; padding:25px;">
                     <h3>✅ Asistencia</h3>
                     <p style="color:#64748b; margin:5px 0 15px;">Registro de asistencia a clases</p>
-                    <a href="#" class="btn-ingresar" style="background:#ef4444;">Ver asistencia →</a>
+                    <a class="btn-ingresar" style="background:#ef4444;" onclick="showSection('asistencia')">Ver asistencia →</a>
                 </div>
                 <!-- Tarjeta: Calendario Académico -->
                 <div class="card-curso" style="border-left: 6px solid #06b6d4; padding:25px;">
                     <h3>📆 Calendario Académico</h3>
                     <p style="color:#64748b; margin:5px 0 15px;">Fechas importantes del semestre</p>
-                    <a href="#" class="btn-ingresar" style="background:#06b6d4;">Ver calendario →</a>
+                    <a class="btn-ingresar" style="background:#06b6d4;" onclick="showSection('calendario')">Ver calendario →</a>
                 </div>
             </div>
 
@@ -580,7 +621,53 @@
             </div>
         </div>
 
+        <!-- ========== SECCIÓN ASISTENCIA (agregado) ========== -->
+        <div id="section-asistencia" style="display:none;">
+            <h2 style="color:#0f172a; margin-bottom:20px;">✅ Registro de Asistencia</h2>
+            <div class="section-block">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Clases Dictadas</th>
+                            <th>Asistencias</th>
+                            <th>Faltas</th>
+                            <th>% Asistencia</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-asistencia"></tbody>
+                </table>
+                <p style="margin-top:15px; color:#94a3b8; font-size:13px;">💡 El reglamento exige un mínimo de 70% de asistencia para conservar el derecho a examen.</p>
+            </div>
+        </div>
+
+        <!-- ========== SECCIÓN CALENDARIO ACADÉMICO (agregado) ========== -->
+        <div id="section-calendario" style="display:none;">
+            <h2 style="color:#0f172a; margin-bottom:20px;">📆 Calendario Académico 2026 - I</h2>
+            <div class="section-block">
+                <table>
+                    <thead><tr><th>Fecha</th><th>Evento</th></tr></thead>
+                    <tbody>
+                        <tr><td>17/03/2026</td><td>Inicio del semestre académico</td></tr>
+                        <tr><td>20/07/2026</td><td>Entrega de avance del proyecto de curso</td></tr>
+                        <tr><td>21/07/2026 – 25/07/2026</td><td>Semana de exámenes parciales</td></tr>
+                        <tr><td>28/07/2026</td><td>Examen Final</td></tr>
+                        <tr><td>04/08/2026</td><td>Publicación de notas finales</td></tr>
+                        <tr><td>10/08/2026</td><td>Fin del semestre académico</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </main>
+
+    <!-- ========== MODAL: Detalle / Ingreso a curso (agregado) ========== -->
+    <div id="modalCurso" class="modal-overlay" onclick="if(event.target === this) cerrarModal()">
+        <div class="modal-caja">
+            <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
+            <div id="modalContenido"></div>
+        </div>
+    </div>
 
     <script>
         // =====================================================
@@ -636,6 +723,26 @@
                 silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_SERIES%20DE%20TIEMPO%20-%20LLUEN%20VALLEJOS%20CESAR%20AUGUSTO.pdf'
             }
         ];
+
+        // Docentes por código de curso (usado en el modal de "Ingresar")
+        const docentesPorCurso = {
+            'EST315': 'M. Sc. Romel Percy Melgarejo Bolívar',
+            'EST314': 'Aleman Gonzales Leonid',
+            'EST316': 'Apaza Tarqui Alejandro',
+            'EST210': 'Morillos Valderrama Santos Octavio',
+            'EST200': 'Vargas Valverde Confesor Milan',
+            'EST317': 'Lluen Vallejos Cesar Augusto'
+        };
+
+        // Datos de asistencia por curso (agregado)
+        const asistenciaPorCurso = {
+            'EST315': { dictadas: 18, asistencias: 17 },
+            'EST314': { dictadas: 16, asistencias: 15 },
+            'EST316': { dictadas: 17, asistencias: 16 },
+            'EST210': { dictadas: 18, asistencias: 18 },
+            'EST200': { dictadas: 16, asistencias: 14 },
+            'EST317': { dictadas: 17, asistencias: 17 }
+        };
 
         // =====================================================
         // 2. DATOS DE COMPAÑEROS (con DNI aleatorio fijo)
@@ -707,7 +814,7 @@
                     <span class="grupo">Grupo: ${curso.grupo}</span>
                     <span class="etiqueta-obligatorio">OBLIGATORIO</span>
                     <div class="facultad">INGENIERIA ESTADISTICA E INFORMATICA<br>FINESI</div>
-                    <a href="${curso.enlace}" class="btn-ingresar">Ingresar →</a>
+                    <a class="btn-ingresar" onclick="verCurso('${curso.codigo}')">Ingresar →</a>
                     <a href="${curso.silabo}" target="_blank" class="btn-silabo">📄 Ver sílabo</a>
                 `;
                 container.appendChild(card);
@@ -725,6 +832,51 @@
                 row.innerHTML = `<td>${index + 1}</td><td><strong>${comp.nombre}</strong></td><td>${comp.correo}</td>`;
                 tbody.appendChild(row);
             });
+        }
+
+        // Renderiza la tabla de asistencia (agregado)
+        function renderAsistencia() {
+            const tbody = document.getElementById('tabla-asistencia');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            cursos.forEach(curso => {
+                const d = asistenciaPorCurso[curso.codigo] || { dictadas: 0, asistencias: 0 };
+                const faltas = d.dictadas - d.asistencias;
+                const porcentaje = d.dictadas > 0 ? ((d.asistencias / d.dictadas) * 100).toFixed(1) : '0.0';
+                const color = porcentaje >= 80 ? '#166534' : (porcentaje >= 70 ? '#92400e' : '#991b1b');
+                const fondo = porcentaje >= 80 ? '#dcfce7' : (porcentaje >= 70 ? '#fef3c7' : '#fee2e2');
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${curso.nombre}</strong><br><span style="color:#3b82f6; font-size:12px;">${curso.codigo}</span></td>
+                    <td>${d.dictadas}</td>
+                    <td>${d.asistencias}</td>
+                    <td>${faltas}</td>
+                    <td><span class="badge-asistencia" style="background:${fondo}; color:${color};">${porcentaje}%</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Abre el modal de "Ingresar" a un curso (agregado)
+        function verCurso(codigo) {
+            const curso = cursos.find(c => c.codigo === codigo);
+            if (!curso) return;
+            const docente = docentesPorCurso[codigo] || 'Docente por asignar';
+            const modal = document.getElementById('modalCurso');
+            const contenido = document.getElementById('modalContenido');
+            contenido.innerHTML = `
+                <span class="codigo">${curso.codigo}</span>
+                <h3 style="margin:10px 0 5px; color:#0f172a;">${curso.nombre}</h3>
+                <p style="color:#64748b; margin-bottom:5px;">Docente: ${docente}</p>
+                <p style="color:#64748b; margin-bottom:15px;">Grupo: ${curso.grupo} · Semestre 2026-I</p>
+                <p style="color:#1e293b; margin-bottom:20px;">Estás a punto de ingresar al aula virtual de este curso, donde encontrarás materiales, tareas y anuncios del docente.</p>
+                <a href="${curso.silabo}" target="_blank" class="btn-silabo" style="display:block; text-align:center;">📄 Ver sílabo del curso</a>
+            `;
+            modal.style.display = 'flex';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modalCurso').style.display = 'none';
         }
 
         // =====================================================
@@ -763,7 +915,9 @@
                 'silabos': '📄 Sílabos',
                 'horario': '📅 Horario',
                 'docente': '👨‍🏫 Plana Docente',
-                'companeros': '👥 Compañeros'
+                'companeros': '👥 Compañeros',
+                'asistencia': '✅ Asistencia',
+                'calendario': '📆 Calendario Académico'
             };
             headerTitle.textContent = mapTitles[sectionName] || '📋 Panel de Control';
         }
@@ -774,6 +928,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             renderCursos();
             renderCompaneros();
+            renderAsistencia();
             actualizarContador();
             showSection('inicio');
         });
