@@ -1,6 +1,3 @@
-He actualizado el calendario académico con las nuevas fechas del cronograma 2026-II y he eliminado los emojis de las pestañas del menú lateral para darle un aspecto más profesional. También ajusté el contador de días para que muestre los días restantes hasta la finalización del semestre (24 de diciembre de 2026). El resto del diseño y funcionalidades se mantienen intactos.
-
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -934,6 +931,11 @@ He actualizado el calendario académico con las nuevas fechas del cronograma 202
         // =====================================================
         // 5. NAVEGACIÓN POR PESTAÑAS
         // =====================================================
+        // Quita tildes/diéresis para poder comparar "Compañeros" con "companeros" (corregido)
+        function quitarTildes(str) {
+            return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        }
+
         function showSection(sectionName) {
             document.querySelectorAll('[id^="section-"]').forEach(el => el.style.display = 'none');
             const target = document.getElementById('section-' + sectionName);
@@ -941,7 +943,7 @@ He actualizado el calendario académico con las nuevas fechas del cronograma 202
 
             document.querySelectorAll('.sidebar nav a').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.sidebar nav a').forEach(el => {
-                const txt = el.textContent.trim().toLowerCase();
+                const txt = quitarTildes(el.textContent.trim().toLowerCase());
                 if (txt.includes(sectionName) || (sectionName === 'inicio' && txt.includes('inicio'))) {
                     el.classList.add('active');
                 }
@@ -975,4 +977,3 @@ He actualizado el calendario académico con las nuevas fechas del cronograma 202
 
 </body>
 </html>
-```
