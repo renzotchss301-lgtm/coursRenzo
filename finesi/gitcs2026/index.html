@@ -1,3 +1,6 @@
+He actualizado el calendario académico con las nuevas fechas del cronograma 2026-II y he eliminado los emojis de las pestañas del menú lateral para darle un aspecto más profesional. También ajusté el contador de días para que muestre los días restantes hasta la finalización del semestre (24 de diciembre de 2026). El resto del diseño y funcionalidades se mantienen intactos.
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -283,7 +286,7 @@
             .horario-tabla th, .horario-tabla td { padding: 6px; }
         }
 
-        /* --- Modal de curso (agregado) --- */
+        /* --- Modal de curso --- */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -323,7 +326,6 @@
             font-size: 13px;
             font-weight: 600;
         }
-        /* Botón aula virtual en modal */
         .btn-aula {
             background: #8b5cf6;
             color: white;
@@ -350,21 +352,21 @@
             <span>INTRANET</span>
         </h2>
         <nav>
-            <a class="active" onclick="showSection('inicio')">🏠 Inicio</a>
-            <a onclick="showSection('cursos')">📚 Mis Cursos</a>
-            <a onclick="showSection('horario')">📅 Horario</a>
-            <a onclick="showSection('docente')">👨‍🏫 Plana Docente</a>
-            <a onclick="showSection('companeros')">👥 Compañeros</a>
+            <a class="active" onclick="showSection('inicio')">Inicio</a>
+            <a onclick="showSection('cursos')">Mis Cursos</a>
+            <a onclick="showSection('horario')">Horario</a>
+            <a onclick="showSection('docente')">Plana Docente</a>
+            <a onclick="showSection('companeros')">Compañeros</a>
         </nav>
         <div style="margin-top: 40px; font-size: 13px; color: #94a3b8; border-top: 1px solid #1e293b; padding-top: 20px;">
-            <p>Universidad Nacional del Altiplano<br><strong style="color:white;">FINESI - Ingeniería Estadística e Infomática</strong></p>
+            <p>Universidad Nacional del Altiplano<br><strong style="color:white;">FINESI - Ingeniería Estadística e Informática</strong></p>
         </div>
     </aside>
 
     <!-- CONTENIDO PRINCIPAL -->
     <main class="main-content" id="mainContent">
         <header>
-            <h1 id="headerTitle">📋 Panel de Control</h1>
+            <h1 id="headerTitle">Panel de Control</h1>
             <span class="badge">2026 - I</span>
         </header>
 
@@ -420,9 +422,9 @@
                     </ul>
                 </div>
                 <div style="background: rgba(255,255,255,0.85); backdrop-filter: blur(2px); border-radius:16px; padding:20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-                    <h3 style="color:#0f172a; margin-bottom:10px;">⏳ Próximo Examen Final</h3>
+                    <h3 style="color:#0f172a; margin-bottom:10px;">⏳ Finalización del semestre</h3>
                     <p style="font-size: 36px; font-weight: 700; color: #3b82f6; text-align: center;" id="contador-examen">--</p>
-                    <p style="text-align: center; color: #64748b;">días restantes</p>
+                    <p style="text-align: center; color: #64748b;">días restantes (24/12/2026)</p>
                 </div>
             </div>
 
@@ -432,17 +434,17 @@
             </div>
         </div>
 
-        <!-- ========== SECCIÓN CURSOS (con botón a sílabo) ========== -->
+        <!-- ========== SECCIÓN CURSOS ========== -->
         <div id="section-cursos" style="display:none;">
-            <h2 style="color:#0f172a; margin-bottom:20px;">📚 Mis Cursos</h2>
+            <h2 style="color:#0f172a; margin-bottom:20px;">Mis Cursos</h2>
             <div id="cursosContainer" class="grid-cards">
                 <!-- Renderizado por JS -->
             </div>
         </div>
 
-        <!-- ========== SECCIÓN SÍLABOS (lista de descarga) ========== -->
+        <!-- ========== SECCIÓN SÍLABOS ========== -->
         <div id="section-silabos" style="display:none;">
-            <h2 style="color:#0f172a; margin-bottom:20px;">📄 Sílabos Oficiales</h2>
+            <h2 style="color:#0f172a; margin-bottom:20px;">Sílabos Oficiales</h2>
             <div class="silabo-contenido">
                 <heading>📚 Descarga los sílabos de todos tus cursos</heading>
                 <div class="silabo-item">
@@ -498,7 +500,7 @@
 
         <!-- ========== SECCIÓN HORARIO ========== -->
         <div id="section-horario" style="display:none;">
-            <h2 style="color:#0f172a; margin-bottom:20px;">📅 Horario de Clases</h2>
+            <h2 style="color:#0f172a; margin-bottom:20px;">Horario de Clases</h2>
             <div class="section-block" style="overflow-x:auto;">
                 <table class="horario-tabla">
                     <thead>
@@ -595,7 +597,7 @@
 
         <!-- ========== SECCIÓN DOCENTE ========== -->
         <div id="section-docente" style="display:none;">
-            <h2 style="color:#0f172a; margin-bottom:20px;">👨‍🏫 Plana Docente</h2>
+            <h2 style="color:#0f172a; margin-bottom:20px;">Plana Docente</h2>
             <div class="section-block">
                 <div class="docente-perfil">
                     <div class="avatar">👨‍🏫</div>
@@ -627,7 +629,7 @@
 
         <!-- ========== SECCIÓN COMPAÑEROS ========== -->
         <div id="section-companeros" style="display:none;">
-            <h2 style="color:#0f172a; margin-bottom:20px;">👥 Lista de Compañeros</h2>
+            <h2 style="color:#0f172a; margin-bottom:20px;">Lista de Compañeros</h2>
             <div class="section-block">
                 <table>
                     <thead><tr><th>#</th><th>Nombre Completo</th><th>Correo</th></tr></thead>
@@ -637,9 +639,9 @@
             </div>
         </div>
 
-        <!-- ========== SECCIÓN ASISTENCIA (agregado) ========== -->
+        <!-- ========== SECCIÓN ASISTENCIA ========== -->
         <div id="section-asistencia" style="display:none;">
-            <h2 style="color:#0f172a; margin-bottom:20px;">✅ Registro de Asistencia</h2>
+            <h2 style="color:#0f172a; margin-bottom:20px;">Registro de Asistencia</h2>
             <div class="section-block">
                 <table>
                     <thead>
@@ -657,27 +659,45 @@
             </div>
         </div>
 
-        <!-- ========== SECCIÓN CALENDARIO ACADÉMICO (agregado) ========== -->
+        <!-- ========== SECCIÓN CALENDARIO ACADÉMICO (actualizado) ========== -->
         <div id="section-calendario" style="display:none;">
-            <h2 style="color:#0f172a; margin-bottom:20px;">📆 Calendario Académico 2026 - I</h2>
+            <h2 style="color:#0f172a; margin-bottom:20px;">Calendario Académico 2026</h2>
             <div class="section-block">
+                <h3 style="color:#0f172a; margin-bottom:10px;">Reprogramación del semestre 2026-I</h3>
                 <table>
-                    <thead><tr><th>Fecha</th><th>Evento</th></tr></thead>
+                    <thead><tr><th>Evento</th><th>Fecha</th></tr></thead>
                     <tbody>
-                        <tr><td>17/03/2026</td><td>Inicio del semestre académico</td></tr>
-                        <tr><td>20/07/2026</td><td>Entrega de avance del proyecto de curso</td></tr>
-                        <tr><td>21/07/2026 – 25/07/2026</td><td>Semana de exámenes parciales</td></tr>
-                        <tr><td>28/07/2026</td><td>Examen Final</td></tr>
-                        <tr><td>04/08/2026</td><td>Publicación de notas finales</td></tr>
-                        <tr><td>10/08/2026</td><td>Fin del semestre académico</td></tr>
+                        <tr><td>Finalización del semestre 2026-I (entrega de actas, 17 semanas)</td><td>7 de agosto de 2026</td></tr>
+                        <tr><td>Aprobación de relación oficial de egresados 2026-I</td><td>14 de agosto de 2026</td></tr>
                     </tbody>
                 </table>
+
+                <h3 style="color:#0f172a; margin-top:25px; margin-bottom:10px;">Cronograma 2026-II</h3>
+                <table>
+                    <thead><tr><th>Actividad</th><th>Fechas</th></tr></thead>
+                    <tbody>
+                        <tr><td>Elaboración de plan de trabajo, sílabo (docentes)</td><td>10 al 21 de agosto de 2026</td></tr>
+                        <tr><td>Matrícula ingresantes (Examen CEPREUNA 2026-II)</td><td>21, 22 y 24 de julio de 2026 / Rezagados: 27 de julio</td></tr>
+                        <tr><td>Matrícula ingresantes (Examen General 2026-II)</td><td>21, 22 y 24 de julio de 2026 / Rezagados: 14 de agosto</td></tr>
+                        <tr><td>Matrícula ingresantes (Secciones Azángaro y Juli)</td><td>21, 22 y 24 de julio de 2026 / Rezagados: 14 de agosto</td></tr>
+                        <tr><td>Matrícula estudiantes regulares (II al X ciclo, sin desaprobados)</td><td>II y III ciclo: 10 de agosto; IV y V: 11 de agosto; VI-VIII: 12 de agosto; IX a más: 13 de agosto</td></tr>
+                        <tr><td>Matrícula estudiantes con cursos desaprobados</td><td>14 y 17 de agosto de 2026</td></tr>
+                        <tr><td>Matrícula segundo programa y riesgo académico</td><td>18 y 19 de agosto de 2026</td></tr>
+                        <tr><td>Matrícula rezagados</td><td>20 y 21 de agosto de 2026</td></tr>
+                        <tr><td>Nivelación de ingresantes 2026-II</td><td>17 al 21 de agosto de 2026</td></tr>
+                        <tr><td>Inicio de labores académicas 2026-II</td><td>24 de agosto de 2026</td></tr>
+                        <tr><td>Rectificación de matrícula</td><td>24, 25 y 26 de agosto de 2026</td></tr>
+                        <tr><td>Finalización del semestre 2026-II (entrega de actas, 17 semanas)</td><td>24 de diciembre de 2026</td></tr>
+                        <tr><td>Aprobación de relación oficial de egresados 2026-II</td><td>31 de diciembre de 2026</td></tr>
+                    </tbody>
+                </table>
+                <p style="margin-top:15px; color:#94a3b8; font-size:13px;">Fuente: Asamblea Universitaria UNA Puno</p>
             </div>
         </div>
 
     </main>
 
-    <!-- ========== MODAL: Detalle / Ingreso a curso (agregado) ========== -->
+    <!-- ========== MODAL: Detalle / Ingreso a curso ========== -->
     <div id="modalCurso" class="modal-overlay" onclick="if(event.target === this) cerrarModal()">
         <div class="modal-caja">
             <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
@@ -687,7 +707,7 @@
 
     <script>
         // =====================================================
-        // 1. DATOS DE CURSOS (con enlace al sílabo y al aula virtual)
+        // 1. DATOS DE CURSOS
         // =====================================================
         const cursos = [
             {
@@ -746,7 +766,6 @@
             }
         ];
 
-        // Docentes por código de curso (usado en el modal de "Ingresar")
         const docentesPorCurso = {
             'EST315': 'M. Sc. Romel Percy Melgarejo Bolívar',
             'EST314': 'Aleman Gonzales Leonid',
@@ -756,7 +775,6 @@
             'EST317': 'Lluen Vallejos Cesar Augusto'
         };
 
-        // Datos de asistencia por curso (agregado)
         const asistenciaPorCurso = {
             'EST315': { dictadas: 18, asistencias: 17 },
             'EST314': { dictadas: 16, asistencias: 15 },
@@ -767,7 +785,7 @@
         };
 
         // =====================================================
-        // 2. DATOS DE COMPAÑEROS (con DNI aleatorio fijo)
+        // 2. DATOS DE COMPAÑEROS
         // =====================================================
         const nombresCompaneros = [
             'APAZA QUISPE ANTONIO VICENTE',
@@ -856,7 +874,6 @@
             });
         }
 
-        // Renderiza la tabla de asistencia (agregado)
         function renderAsistencia() {
             const tbody = document.getElementById('tabla-asistencia');
             if (!tbody) return;
@@ -879,7 +896,6 @@
             });
         }
 
-        // Abre el modal de "Ingresar" a un curso (agregado)
         function verCurso(codigo) {
             const curso = cursos.find(c => c.codigo === codigo);
             if (!curso) return;
@@ -903,10 +919,10 @@
         }
 
         // =====================================================
-        // 4. CONTADOR DE DÍAS PARA EXAMEN FINAL
+        // 4. CONTADOR DE DÍAS (hasta el 24 de diciembre de 2026)
         // =====================================================
         function actualizarContador() {
-            const targetDate = new Date('2026-07-28');
+            const targetDate = new Date('2026-12-24');
             const now = new Date();
             const diff = Math.ceil((targetDate - now) / (1000 * 60 * 60 * 24));
             const contador = document.getElementById('contador-examen');
@@ -933,16 +949,16 @@
 
             const headerTitle = document.getElementById('headerTitle');
             const mapTitles = {
-                'inicio': '📋 Panel de Control',
-                'cursos': '📚 Mis Cursos',
-                'silabos': '📄 Sílabos',
-                'horario': '📅 Horario',
-                'docente': '👨‍🏫 Plana Docente',
-                'companeros': '👥 Compañeros',
-                'asistencia': '✅ Asistencia',
-                'calendario': '📆 Calendario Académico'
+                'inicio': 'Panel de Control',
+                'cursos': 'Mis Cursos',
+                'silabos': 'Sílabos',
+                'horario': 'Horario',
+                'docente': 'Plana Docente',
+                'companeros': 'Compañeros',
+                'asistencia': 'Asistencia',
+                'calendario': 'Calendario Académico'
             };
-            headerTitle.textContent = mapTitles[sectionName] || '📋 Panel de Control';
+            headerTitle.textContent = mapTitles[sectionName] || 'Panel de Control';
         }
 
         // =====================================================
@@ -959,3 +975,4 @@
 
 </body>
 </html>
+```
