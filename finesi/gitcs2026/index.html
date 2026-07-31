@@ -323,6 +323,22 @@
             font-size: 13px;
             font-weight: 600;
         }
+        /* Botón aula virtual en modal */
+        .btn-aula {
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            padding: 10px 0;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            margin-top: 8px;
+        }
+        .btn-aula:hover { background: #7c3aed; }
     </style>
 </head>
 <body>
@@ -671,7 +687,7 @@
 
     <script>
         // =====================================================
-        // 1. DATOS DE CURSOS (con enlace al sílabo)
+        // 1. DATOS DE CURSOS (con enlace al sílabo y al aula virtual)
         // =====================================================
         const cursos = [
             {
@@ -680,7 +696,8 @@
                 grupo: 'UNICO',
                 obligatorio: true,
                 enlace: '#',
-                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_GESTION%20DE%20PROYECTOS%20TICS%20-%20MELGAREJO%20BOLIVAR%20ROMEL%20PERCY.pdf'
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_GESTION%20DE%20PROYECTOS%20TICS%20-%20MELGAREJO%20BOLIVAR%20ROMEL%20PERCY.pdf',
+                aula: 'https://aulavirtual.unap.edu.pe/'
             },
             {
                 codigo: 'EST314',
@@ -688,7 +705,8 @@
                 grupo: 'UNICO',
                 obligatorio: true,
                 enlace: '#',
-                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Aprendizaje_no_Supervizado%20-%20ALEMAN%20GONZALES%20LEONID.pdf'
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Aprendizaje_no_Supervizado%20-%20ALEMAN%20GONZALES%20LEONID.pdf',
+                aula: 'https://aulavirtual.unap.edu.pe/'
             },
             {
                 codigo: 'EST316',
@@ -696,7 +714,8 @@
                 grupo: 'UNICO',
                 obligatorio: true,
                 enlace: '#',
-                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Arquitectura%20de%20Redes%20y%20Protocolos%20-%20APAZA%20TARQUI%20ALEJANDRO.pdf'
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_Arquitectura%20de%20Redes%20y%20Protocolos%20-%20APAZA%20TARQUI%20ALEJANDRO.pdf',
+                aula: 'https://aulavirtual.unap.edu.pe/'
             },
             {
                 codigo: 'EST210',
@@ -704,7 +723,8 @@
                 grupo: 'UNICO',
                 obligatorio: true,
                 enlace: '#',
-                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_MODELOS%20LINEALES%20-%20MORILLOS%20VALDERRAMA%20SANTOS%20OCTAVIO.pdf'
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_MODELOS%20LINEALES%20-%20MORILLOS%20VALDERRAMA%20SANTOS%20OCTAVIO.pdf',
+                aula: 'https://aulavirtual.unap.edu.pe/'
             },
             {
                 codigo: 'EST200',
@@ -712,7 +732,8 @@
                 grupo: 'UNICO',
                 obligatorio: true,
                 enlace: '#',
-                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_REGRESION%20LINEAL%20Y%20NO%20LINEAL%20-%20VARGAS%20VALVERDE%20CONFESOR%20MILAN.pdf'
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_REGRESION%20LINEAL%20Y%20NO%20LINEAL%20-%20VARGAS%20VALVERDE%20CONFESOR%20MILAN.pdf',
+                aula: 'https://aulavirtual.unap.edu.pe/'
             },
             {
                 codigo: 'EST317',
@@ -720,7 +741,8 @@
                 grupo: 'UNICO',
                 obligatorio: true,
                 enlace: '#',
-                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_SERIES%20DE%20TIEMPO%20-%20LLUEN%20VALLEJOS%20CESAR%20AUGUSTO.pdf'
+                silabo: 'https://github.com/renzotchss301-lgtm/coursRenzo/blob/main/finesi/gitcs2026/SILABOS_SERIES%20DE%20TIEMPO%20-%20LLUEN%20VALLEJOS%20CESAR%20AUGUSTO.pdf',
+                aula: 'https://aulavirtual.unap.edu.pe/'
             }
         ];
 
@@ -870,7 +892,8 @@
                 <p style="color:#64748b; margin-bottom:5px;">Docente: ${docente}</p>
                 <p style="color:#64748b; margin-bottom:15px;">Grupo: ${curso.grupo} · Semestre 2026-I</p>
                 <p style="color:#1e293b; margin-bottom:20px;">Estás a punto de ingresar al aula virtual de este curso, donde encontrarás materiales, tareas y anuncios del docente.</p>
-                <a href="${curso.silabo}" target="_blank" class="btn-silabo" style="display:block; text-align:center;">📄 Ver sílabo del curso</a>
+                <a href="${curso.aula}" target="_blank" class="btn-aula">🚪 Ir al aula virtual</a>
+                <a href="${curso.silabo}" target="_blank" class="btn-silabo" style="display:block; text-align:center; margin-top:10px;">📄 Ver sílabo del curso</a>
             `;
             modal.style.display = 'flex';
         }
